@@ -6,6 +6,10 @@
 /web/install.php
 /web/clear_cache.php
 
+# except
+!/themes
+
+
 # Ignore Google webmaster tool verification
 /web/google*.html
 
