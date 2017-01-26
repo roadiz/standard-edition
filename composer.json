@@ -1,0 +1,34 @@
+{
+    "name": "roadiz/roadiz-stardard-edition",
+    "description": "Roadiz standard edition",
+    "type": "project",
+    "require": {
+        "roadiz/roadiz": "dev-develop"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ambroise Maupate",
+            "email": "ambroise@rezo-zero.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Themes\\":               "themes/",
+            "GeneratedNodeSources\\": "gen-src/GeneratedNodeSources",
+            "Proxies\\":              "gen-src/Proxies"
+        },
+        "psr-0": {
+            "GlobalUrlMatcher":   "gen-src/Compiled/",
+            "GlobalUrlGenerator": "gen-src/Compiled/"
+        }
+    },
+    "extra": {
+        "merge-plugin": {
+            "include": [
+                "themes/*/composer.json"
+            ],
+            "recurse": false
+        }
+    }
+}
