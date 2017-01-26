@@ -6,9 +6,13 @@
 /web/install.php
 /web/clear_cache.php
 
-# except
+# Roadiz theme
 !/themes
 
+# Prevent adding default theme
+# You should rename it!
+/themes/DefaultTheme
+/web/themes/DefaultTheme
 
 # Ignore Google webmaster tool verification
 /web/google*.html
