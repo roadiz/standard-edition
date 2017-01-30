@@ -27,7 +27,7 @@
  * @file clear_cache.php
  * @author Ambroise Maupate
  */
-use RZ\Roadiz\Core\Kernel;
+
 use RZ\Roadiz\Core\HttpFoundation\Request;
 use RZ\Roadiz\Utils\Clearer\AssetsClearer;
 use RZ\Roadiz\Utils\Clearer\ConfigurationCacheClearer;
@@ -69,7 +69,7 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
     exit();
 }
 
-$kernel = Kernel::getInstance('prod', false);
+$kernel = AppKernel::getInstance('prod', false);
 $kernel->boot();
 $request = Request::createFromGlobals();
 $kernel->container['request'] = $request;

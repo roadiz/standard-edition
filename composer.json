@@ -14,14 +14,18 @@
     ],
     "autoload": {
         "psr-4": {
-            "Themes\\":               "themes/",
-            "GeneratedNodeSources\\": "gen-src/GeneratedNodeSources",
-            "Proxies\\":              "gen-src/Proxies"
+            "Themes\\": "themes/",
+            "GeneratedNodeSources\\": "app/gen-src/GeneratedNodeSources",
+            "Proxies\\": "app/gen-src/Proxies"
         },
         "psr-0": {
-            "GlobalUrlMatcher":   "gen-src/Compiled/",
-            "GlobalUrlGenerator": "gen-src/Compiled/"
-        }
+            "GlobalUrlMatcher": "app/gen-src/Compiled/",
+            "GlobalUrlGenerator": "app/gen-src/Compiled/"
+        },
+        "classmap": [
+            "app/AppKernel.php",
+            "app/DevAppKernel.php"
+        ]
     },
     "extra": {
         "merge-plugin": {

@@ -28,7 +28,6 @@
  * @author Ambroise Maupate
  */
 
-use RZ\Roadiz\Core\Kernel;
 use RZ\Roadiz\Core\HttpFoundation\Request;
 
 if (version_compare(phpversion(), '5.4.3', '<')) {
@@ -41,7 +40,7 @@ define('ROADIZ_ROOT', dirname(__DIR__));
 // Include Composer Autoload (relative to project root).
 require(ROADIZ_ROOT . "/vendor/autoload.php");
 
-$kernel = Kernel::getInstance('prod', false);
+$kernel = AppKernel::getInstance('prod', false);
 $request = Request::createFromGlobals();
 
 $response = $kernel->handle($request);
