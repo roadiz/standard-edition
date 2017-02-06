@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © 2014, Ambroise Maupate and Julien Blanchet
+ * Copyright © 2017, Ambroise Maupate and Julien Blanchet
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -42,6 +42,10 @@ require(ROADIZ_ROOT . "/vendor/autoload.php");
 
 $kernel = AppKernel::getInstance('prod', false);
 $request = Request::createFromGlobals();
+
+// Using Front Proxy (HA or Docker)
+// Trust incoming request IP as your reverse proxy
+// Request::setTrustedProxies(array($request->server->get('REMOTE_ADDR')));
 
 $response = $kernel->handle($request);
 $response->send();

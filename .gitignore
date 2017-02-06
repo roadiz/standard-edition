@@ -2,6 +2,7 @@
 # Roadiz
 #
 /*.sql
+/web/index.php
 /web/dev.php
 /web/install.php
 /web/clear_cache.php
