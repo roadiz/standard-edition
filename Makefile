@@ -48,10 +48,10 @@ clean :
 # Uninstall NPM deps and clean generated assets
 uninstall : clean
 	rm -rf ./themes/${THEME}/static/node_modules;
-	@echo "✅\t${GREEN}Removed NPM and Bower dependencies. \tOK.${NC}" >&2;
+	@echo "✅\t${GREEN}Removed NPM dependencies. \tOK.${NC}" >&2;
 #
 # Test if required binaries are available
 #
 configtest:
 	@command -v npm >/dev/null 2>&1 || { echo "❌\t${RED}I require npm but it's not installed. \tAborting.${NC}" >&2; exit 1; }
-	@echo "✅\t${GREEN}NPM and Gulp-CLi are available. \tOK.${NC}" >&2;
+	@echo "✅\t${GREEN}NodeJS is available. \tOK.${NC}" >&2;

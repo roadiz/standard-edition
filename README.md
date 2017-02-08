@@ -11,7 +11,7 @@ composer create-project roadiz/standard-edition
 For the moment, we don’t have any warm-up script to generate configuration and entry-points automatically. Follow the next step to create a dev-ready environment.
 
 ```shell
-# Copy config and add vagrant database credentials
+# Copy config and add your database credentials in…
 cp app/conf/config.default.yml app/conf/config.yml
 
 # Copy Vagrantfile and use a dedicated IP
