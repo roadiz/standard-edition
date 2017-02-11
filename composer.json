@@ -24,8 +24,7 @@
         },
         "classmap": [
             "app/AppKernel.php",
-            "app/DevAppKernel.php",
-            "app/Composer.php"
+            "app/DevAppKernel.php"
         ]
     },
     "extra": {
