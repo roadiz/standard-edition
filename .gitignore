@@ -4,6 +4,7 @@
 /*.sql
 /app/*.sql
 /web/index.php
+/web/preview.php
 /web/dev.php
 /web/install.php
 /web/clear_cache.php

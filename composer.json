@@ -3,7 +3,7 @@
     "description": "Roadiz standard edition",
     "type": "project",
     "require": {
-        "roadiz/roadiz": "~0.17.0"
+        "roadiz/roadiz": "dev-develop"
     },
     "license": "MIT",
     "authors": [
@@ -24,7 +24,8 @@
         },
         "classmap": [
             "app/AppKernel.php",
-            "app/DevAppKernel.php"
+            "app/DevAppKernel.php",
+            "app/Composer.php"
         ]
     },
     "extra": {
@@ -34,5 +35,24 @@
             ],
             "recurse": false
         }
+    },
+    "scripts": {
+        "cache-scripts": [
+            "php bin/roadiz cache:clear -e prod",
+            "php bin/roadiz cache:clear -e dev",
+            "php bin/roadiz cache:clear -e prod --preview"
+        ],
+        "post-install-cmd": [
+            "php bin/roadiz composer:post-install",
+            "@cache-scripts"
+        ],
+        "post-update-cmd": [
+            "php bin/roadiz composer:post-update",
+            "@cache-scripts"
+        ],
+        "post-create-project-cmd": [
+            "php bin/roadiz composer:post-create-project",
+            "@cache-scripts"
+        ]
     }
 }

@@ -26,9 +26,17 @@ class AppKernel extends \RZ\Roadiz\Core\Kernel
     /**
      * {@inheritdoc}
      */
+    public function getPublicDir()
+    {
+        return ROADIZ_ROOT . '/web';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getPublicFilesPath()
     {
-        return ROADIZ_ROOT . '/web' . $this->getPublicFilesBasePath();
+        return $this->getPublicDir() . $this->getPublicFilesBasePath();
     }
 
     /**
