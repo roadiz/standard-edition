@@ -23,7 +23,10 @@ This is the **production-ready edition** for Roadiz. It is meant to setup your *
 ## Usage
 
 ```shell
+# Create a new Roadiz project on develop branch
 composer create-project roadiz/standard-edition -s dev
+# Create a new theme for your project
+bin/roadiz themes:generate -d FooBar
 ```
 
 Composer will automatically create a new project based on Roadiz and download every dependencies. 
