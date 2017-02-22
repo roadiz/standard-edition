@@ -27,7 +27,6 @@
  * @file index.php
  * @author Ambroise Maupate
  */
-
 use RZ\Roadiz\Core\HttpFoundation\Request;
 
 if (version_compare(phpversion(), '5.4.3', '<')) {
