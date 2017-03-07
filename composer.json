@@ -24,7 +24,8 @@
         },
         "classmap": [
             "app/AppKernel.php",
-            "app/DevAppKernel.php"
+            "app/DevAppKernel.php",
+            "app/AppCache.php"
         ]
     },
     "extra": {
