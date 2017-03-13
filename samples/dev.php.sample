@@ -56,8 +56,10 @@ define('ROADIZ_ROOT', dirname(__DIR__));
 // Include Composer Autoload (relative to project root).
 require(ROADIZ_ROOT . "/vendor/autoload.php");
 
-
-$kernel = DevAppKernel::getInstance('dev', true, false, 'my_site');
+// Use DevAppKernel on Vagrant box to use a cache dir not
+// in the shared folder.
+//$kernel = DevAppKernel::getInstance('dev', true, false, 'my_site');
+$kernel = AppKernel::getInstance('dev', true, false);
 $request = Request::createFromGlobals();
 
 $response = $kernel->handle($request);
