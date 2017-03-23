@@ -43,7 +43,7 @@ nano Vagrantfile;
 # This will be useful to generate assets and clear cache
 # in one command
 nano Makefile; 
-cd themes/FooBarTheme/static;
+cd themes/FooBarTheme;
 # Install NPM dependenecies for your front-end dev environment.
 # Use YARN
 yarn;
@@ -54,7 +54,7 @@ npm install;
 # This may take several minute if your 
 # launching Vagrant up for the first time
 # as it has to download Roadiz box which is ~ 1,4GB
-cd ../../../;
+cd ../../;
 vagrant up;
 ```
 
