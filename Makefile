@@ -18,10 +18,10 @@ UPDATE_CMD="`yarn upgrade`"
 all : configtest install build cache
 
 # Install NPM deps and Bower deps
-install : configtest themes/${THEME}/static/node_modules
+install : configtest themes/${THEME}/node_modules
 
-themes/${THEME}/static/node_modules :
-	cd ./themes/${THEME}/static && ${INSTALL_CMD};
+themes/${THEME}/node_modules :
+	cd ./themes/${THEME} && ${INSTALL_CMD};
 
 .PHONY : clean uninstall update build watch cache
 
@@ -32,22 +32,21 @@ cache :
 
 # Launch Gulp watch task
 watch : configtest
-	cd ./themes/${THEME}/static && npm run dev;
+	cd ./themes/${THEME} && npm run dev;
 # Build prod ready assets with Gulp
 build : configtest
-	cd ./themes/${THEME}/static && npm run build;
+	cd ./themes/${THEME} && npm run build;
 # Update NPM deps
 update : configtest
-	cd ./themes/${THEME}/static && ${UPDATE_CMD};
+	cd ./themes/${THEME} && ${UPDATE_CMD};
 	@echo "✅\t${GREEN}Updated NPM dependencies. \tOK.${NC}" >&2;
 # Delete generated assets
 clean :
-	rm -rf ./themes/${THEME}/static/build;
-	rm -rf ./themes/${THEME}/static/dist;
+	rm -rf ./themes/${THEME}/static/*;
 	@echo "✅\t${GREEN}Cleaned build and dist folders. \tOK.${NC}" >&2;
 # Uninstall NPM deps and clean generated assets
 uninstall : clean
-	rm -rf ./themes/${THEME}/static/node_modules;
+	rm -rf ./themes/${THEME}/node_modules;
 	@echo "✅\t${GREEN}Removed NPM dependencies. \tOK.${NC}" >&2;
 #
 # Test if required binaries are available
