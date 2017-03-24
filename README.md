@@ -24,37 +24,47 @@ This is the **production-ready edition** for Roadiz. It is meant to setup your *
 
 ```shell
 # Create a new Roadiz project on develop branch
-composer create-project roadiz/standard-edition -s dev
+composer create-project roadiz/standard-edition;
 # Create a new theme for your project
-cd standard-edition
-bin/roadiz themes:generate -d FooBar
+cd standard-edition;
+bin/roadiz themes:generate FooBar;
 ```
 
 Composer will automatically create a new project based on Roadiz and download every dependencies. 
 
-Composer script will copy a default configuration file and your entry-points in `web/` folder automatically. However, if you want to use Vagrant and `make`for your development, here are some useful commands. 
+Composer script will copy a default configuration file and your entry-points in `web/` folder automatically and a sample `Vagrantfile` in your project root. For development, here are some useful commands: 
 
 ```shell
-# Copy Vagrantfile and use a dedicated IP
+# Edit your Vagrantfile and use a dedicated IP
 # add this IP to your /etc/hosts
-cp samples/Vagrantfile.sample Vagrantfile
+nano Vagrantfile;
 
 # Adapt Makefile with your theme name and NPM/Yarn
 # This will be useful to generate assets and clear cache
 # in one command
-nano Makefile 
+nano Makefile; 
+cd themes/FooBarTheme;
+# Install NPM dependenecies for your front-end dev environment.
+# Use YARN
+yarn;
+# OR use vanilla NPM
+npm install;
 
-# Init VM
-vagrant up --no-provision
-vagrant provision --provision-with=roadiz,mailcatcher
+# Init Vagrant dev VM
+# This may take several minute if your 
+# launching Vagrant up for the first time
+# as it has to download Roadiz box which is ~ 1,4GB
+cd ../../;
+vagrant up;
 ```
 
-Then you’ll need to create a new theme and symlink its `static/` folder into
-`web/` directory.
+If you have a full PHP-MySQL server running directly on your development machine you can
+ignore *Vagrant* and use it. Make sure that your virtual host is configured to use `web/`
+folder as *server root*.
 
 ## Update Roadiz sources
 
-Simply call `composer update --no-dev` to upgrade Roadiz. 
+Simply call `composer update` to upgrade Roadiz. 
 You’ll need to execute regular operations if you need to migrate your database.
 
 ## Maximize performances for production
