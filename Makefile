@@ -42,7 +42,8 @@ update : configtest
 	@echo "✅\t${GREEN}Updated NPM dependencies. \tOK.${NC}" >&2;
 # Delete generated assets
 clean :
-	rm -rf ./themes/${THEME}/static/*;
+	rm -rf ./themes/${THEME}/static/css/*;
+	rm -rf ./themes/${THEME}/static/js/*;
 	@echo "✅\t${GREEN}Cleaned build and dist folders. \tOK.${NC}" >&2;
 # Uninstall NPM deps and clean generated assets
 uninstall : clean
