@@ -45,3 +45,4 @@ assetsProcessing:
     maxPixelSize: 1920
     jpegoptimPath: ~
     pngquantPath: ~
+    subscribers: []
