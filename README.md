@@ -53,7 +53,7 @@ npm install;
 # Init Vagrant dev VM
 # This may take several minute if your 
 # launching Vagrant up for the first time
-# as it has to download Roadiz box which is ~ 1,4GB
+# as it has to download Roadiz box which is ~ 1,2GB
 cd ../../;
 vagrant up;
 ```
