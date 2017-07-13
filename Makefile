@@ -29,7 +29,8 @@ cache :
 	bin/roadiz cache:clear
 	bin/roadiz cache:clear -e prod
 	bin/roadiz cache:clear -e prod --preview
-	curl --max-time 2 http://localhost/clear_cache.php
+	bin/roadiz cache:clear-fpm -e prod
+	bin/roadiz cache:clear-fpm -e prod --preview
 
 # Launch Gulp watch task
 watch : configtest
