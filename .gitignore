@@ -3,6 +3,9 @@
 #
 /*.sql
 /app/*.sql
+/app/*.zip
+/app/sessions/*
+!/app/sessions/.gitkeep
 /web/index.php
 /web/preview.php
 /web/dev.php
