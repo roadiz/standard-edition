@@ -32,7 +32,7 @@ mailer:
 # root dir (app/)
 entities:
     - "../vendor/roadiz/roadiz/src/Roadiz/Core/Entities"
-    - "../vendor/roadiz/roadiz/src/Roadiz/Core/AbstractEntities"
+    - "../vendor/roadiz/models/src/Roadiz/Core/AbstractEntities"
     - "gen-src/GeneratedNodeSources"
 # Lifetime of remember-me cookie in seconds (30 days)
 rememberMeLifetime: 2592000
