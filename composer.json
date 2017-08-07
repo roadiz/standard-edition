@@ -3,7 +3,7 @@
     "description": "Roadiz standard edition",
     "type": "project",
     "require": {
-        "roadiz/roadiz": "dev-develop"
+        "roadiz/roadiz": "~0.20.0"
     },
     "license": "MIT",
     "authors": [
@@ -40,7 +40,9 @@
         "cache-scripts": [
             "php bin/roadiz cache:clear -e prod",
             "php bin/roadiz cache:clear -e dev",
-            "php bin/roadiz cache:clear -e prod --preview"
+            "php bin/roadiz cache:clear -e prod --preview",
+            "php bin/roadiz cache:clear-fpm -e prod",
+            "php bin/roadiz cache:clear-fpm -e prod --preview"
         ],
         "post-install-cmd": [
             "php bin/roadiz composer:post-install",
