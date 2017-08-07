@@ -72,12 +72,12 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
 
 $request = Request::createFromGlobals();
 if ($request->query->has('env') && $request->query->get('env') == 'preview') {
-    $kernel = new Kernel('prod', false, true);
+    $kernel = new AppKernel('prod', false, true);
 } elseif ($request->query->has('env') && $request->query->get('env') == 'dev') {
     //$kernel = new DevAppKernel('dev', true, false, 'my_site');
-    $kernel = new Kernel('dev', true);
+    $kernel = new AppKernel('dev', true);
 } else {
-    $kernel = new Kernel('prod', false);
+    $kernel = new AppKernel('prod', false);
 }
 
 $kernel->boot();
