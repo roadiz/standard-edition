@@ -8,7 +8,7 @@ RED=\033[0;31m
 NC=\033[0m
 THEME=BaseTheme
 # Use Yarn
-INSTALL_CMD="`yarn install`"
+INSTALL_CMD="`yarn`"
 UPDATE_CMD="`yarn upgrade`"
 # Or use NPM
 #INSTALL_CMD="`npm install`"
@@ -29,6 +29,8 @@ cache :
 	bin/roadiz cache:clear
 	bin/roadiz cache:clear -e prod
 	bin/roadiz cache:clear -e prod --preview
+	bin/roadiz cache:clear-fpm -e prod
+	bin/roadiz cache:clear-fpm -e prod --preview
 
 # Launch Gulp watch task
 watch : configtest

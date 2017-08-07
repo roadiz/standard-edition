@@ -7,6 +7,10 @@ doctrine:
     user: ""
     password: ""
     dbname: ""
+    charset: utf8mb4
+    default_table_options:
+        charset: utf8mb4
+        collate: utf8mb4_unicode_ci
 # http://symfony.com/doc/current/reference/configuration/doctrine.html#caching-drivers
 # If null or empty, Roadiz will try to detect best cache driver available
 cacheDriver:
@@ -28,7 +32,7 @@ mailer:
 # root dir (app/)
 entities:
     - "../vendor/roadiz/roadiz/src/Roadiz/Core/Entities"
-    - "../vendor/roadiz/roadiz/src/Roadiz/Core/AbstractEntities"
+    - "../vendor/roadiz/models/src/Roadiz/Core/AbstractEntities"
     - "gen-src/GeneratedNodeSources"
 # Lifetime of remember-me cookie in seconds (30 days)
 rememberMeLifetime: 2592000

@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php
-/*
+/**
  * Copyright © 2014, Ambroise Maupate and Julien Blanchet
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -30,15 +30,14 @@
  */
 
 use RZ\Roadiz\Console\RoadizApplication;
-use RZ\Roadiz\Core\Kernel;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Debug\Debug;
 
 set_time_limit(0);
 
-if (version_compare(phpversion(), '5.4.3', '<')) {
+if (version_compare(phpversion(), '5.6.0', '<')) {
     echo 'Your PHP version is ' . phpversion() . "." . PHP_EOL;
-    echo 'You need a least PHP version 5.4.3.' . PHP_EOL;
+    echo 'You need a least PHP version 5.6.0.' . PHP_EOL;
     exit(1);
 }
 
@@ -55,7 +54,7 @@ if ($debug) {
     Debug::enable();
 }
 
-$kernel = AppKernel::getInstance($env, $debug, $preview);
+$kernel = new AppKernel($env, $debug, $preview);
 
 $application = new RoadizApplication($kernel);
 $application->run($input);

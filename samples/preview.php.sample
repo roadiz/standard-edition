@@ -29,9 +29,9 @@
  */
 use RZ\Roadiz\Core\HttpFoundation\Request;
 
-if (version_compare(phpversion(), '5.4.3', '<')) {
+if (version_compare(phpversion(), '5.6.0', '<')) {
     echo 'Your PHP version is ' . phpversion() . "." . PHP_EOL;
-    echo 'You need a least PHP version 5.4.3';
+    echo 'You need a least PHP version 5.6.0';
     exit(1);
 }
 
@@ -45,12 +45,12 @@ define('ROADIZ_ROOT', dirname(__DIR__));
 // Include Composer Autoload (relative to project root).
 require(ROADIZ_ROOT . "/vendor/autoload.php");
 
-$kernel = AppKernel::getInstance('prod', false, true);
+$kernel = new AppKernel('prod', false, true);
 $request = Request::createFromGlobals();
 
 // Using Front Proxy (HA or Docker)
 // Trust incoming request IP as your reverse proxy
-// Request::setTrustedProxies(array($request->server->get('REMOTE_ADDR')));
+// Request::setTrustedProxies([$request->server->get('REMOTE_ADDR')]);
 
 $response = $kernel->handle($request);
 $response->send();

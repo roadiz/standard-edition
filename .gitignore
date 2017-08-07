@@ -3,11 +3,15 @@
 #
 /*.sql
 /app/*.sql
+/app/*.zip
+/app/sessions/*
+!/app/sessions/.gitkeep
 /web/index.php
 /web/preview.php
 /web/dev.php
 /web/install.php
 /web/clear_cache.php
+/pimple.json
 
 # Roadiz theme
 !/themes
