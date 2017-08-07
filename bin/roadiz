@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php
-/*
+/**
  * Copyright © 2014, Ambroise Maupate and Julien Blanchet
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -30,7 +30,6 @@
  */
 
 use RZ\Roadiz\Console\RoadizApplication;
-use RZ\Roadiz\Core\Kernel;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Debug\Debug;
 
@@ -55,7 +54,7 @@ if ($debug) {
     Debug::enable();
 }
 
-$kernel = AppKernel::getInstance($env, $debug, $preview);
+$kernel = new AppKernel($env, $debug, $preview);
 
 $application = new RoadizApplication($kernel);
 $application->run($input);

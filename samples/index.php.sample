@@ -39,7 +39,7 @@ define('ROADIZ_ROOT', dirname(__DIR__));
 // Include Composer Autoload (relative to project root).
 require(ROADIZ_ROOT . "/vendor/autoload.php");
 
-$kernel = AppKernel::getInstance('prod', false);
+$kernel = new AppKernel('prod', false);
 $request = Request::createFromGlobals();
 
 //$kernel = new AppCache($kernel);
