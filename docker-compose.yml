@@ -1,0 +1,38 @@
+version: '2'
+services:
+    db:
+        image: mysql:5.6
+        volumes:
+            - "./.data/db:/var/lib/mysql:cached"
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    php:
+        build: ./docker/php7-fpm
+        depends_on:
+            - db
+            - solr
+        volumes:
+            - ${ROADIZ_APP_PATH}:/usr/share/nginx/html:cached
+    nginx:
+        image: nginx
+        ports:
+            - 80:80
+        volumes_from:
+            - php
+        volumes:
+            - ${ROADIZ_APP_PATH}/docker/nginx/roadiz.conf:/etc/nginx/conf.d/roadiz.conf
+        depends_on:
+            - php
+    solr:
+         image: solr
+         ports:
+             - "8983:8983"
+         volumes:
+             - "./.data/solr:/opt/solr/server/solr/mycores:cached"
+         entrypoint:
+             - docker-entrypoint.sh
+             - solr-precreate
+             - roadiz

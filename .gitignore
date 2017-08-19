@@ -12,6 +12,8 @@
 /web/install.php
 /web/clear_cache.php
 /pimple.json
+/.data
+/.env
 
 # Roadiz theme
 !/themes
@@ -103,9 +105,6 @@ node_modules
 ### Vagrant ###
 /Vagrantfile
 .vagrant/
-
-### Docker ###
-/docker-compose.yml
 
 ### grunt ###
 # Grunt usually compiles files inside this directory
