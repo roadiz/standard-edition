@@ -32,7 +32,11 @@ bin/roadiz themes:generate FooBar;
 
 Composer will automatically create a new project based on Roadiz and download every dependencies. 
 
-Composer script will copy a default configuration file and your entry-points in `web/` folder automatically and a sample `Vagrantfile` in your project root. For development, here are some useful commands: 
+Composer script will copy a default configuration file and your entry-points in `web/` folder automatically and a sample `Vagrantfile` in your project root. 
+
+### Develop with *Vagrant*
+
+For development, here are some useful commands: 
 
 ```bash
 # Edit your Vagrantfile and use a dedicated IP
@@ -62,10 +66,18 @@ If you have a full PHP-MySQL server running directly on your development machine
 ignore *Vagrant* and use it. Make sure that your virtual host is configured to use `web/`
 folder as *server root*.
 
-## Docker
+### Develop with *Docker*
+
+*Docker* on Linux will provide awesome performances and a production-like environment 
+without bloating your development machine:
 
 ```bash
+# Copy sample environment variables
+# and adjust them against your needs.
+cp .env.dist .env;
+# Build PHP image
 docker-compose build;
+# Create and start containers
 docker-compose up -d;
 
 # Adapt Makefile with your theme name and NPM/Yarn
@@ -80,11 +92,15 @@ yarn;
 npm install;
 ```
 
-### On Mac or Windows
+#### On Mac or Windows
 
-You can use docker-sync to improve IO performances with your shared volumes.
+Unfortunately, on *macOS* and *Windows* performances will be worse than *Vagrant* due to
+the *volumes* sharing system. You can use [docker-sync](http://docker-sync.io/) to improve IO performances with your shared volumes.    
+Use following command **instead of** `docker-compose up -d`:
 
 ```bash
+# Make sure you setup docker-sync on your computer before.
+# gem install docker-sync
 docker-sync-stack start
 ```
 
