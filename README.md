@@ -34,7 +34,7 @@ Composer will automatically create a new project based on Roadiz and download ev
 
 Composer script will copy a default configuration file and your entry-points in `web/` folder automatically and a sample `Vagrantfile` in your project root. For development, here are some useful commands: 
 
-```shell
+```bash
 # Edit your Vagrantfile and use a dedicated IP
 # add this IP to your /etc/hosts
 nano Vagrantfile;
@@ -61,6 +61,32 @@ vagrant up;
 If you have a full PHP-MySQL server running directly on your development machine you can
 ignore *Vagrant* and use it. Make sure that your virtual host is configured to use `web/`
 folder as *server root*.
+
+## Docker
+
+```bash
+docker-compose build;
+docker-compose up -d;
+
+# Adapt Makefile with your theme name and NPM/Yarn
+# This will be useful to generate assets and clear cache
+# in one command
+nano Makefile; 
+cd themes/FooBarTheme;
+# Install NPM dependenecies for your front-end dev environment.
+# Use YARN
+yarn;
+# OR use vanilla NPM
+npm install;
+```
+
+### On Mac or Windows
+
+You can use docker-sync to improve IO performances with your shared volumes.
+
+```bash
+docker-sync-stack start
+```
 
 ## Update Roadiz sources
 
