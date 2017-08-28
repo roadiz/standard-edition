@@ -3,7 +3,7 @@
     "description": "Roadiz standard edition",
     "type": "project",
     "require": {
-        "roadiz/roadiz": "~0.20.0"
+        "roadiz/roadiz": "~0.20.5"
     },
     "license": "MIT",
     "authors": [
