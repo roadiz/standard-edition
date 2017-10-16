@@ -3,7 +3,7 @@
     "description": "Roadiz standard edition",
     "type": "project",
     "require": {
-        "roadiz/roadiz": "~0.20.5"
+        "roadiz/roadiz": "~0.20.7"
     },
     "license": "MIT",
     "authors": [
@@ -27,14 +27,6 @@
             "app/DevAppKernel.php",
             "app/AppCache.php"
         ]
-    },
-    "extra": {
-        "merge-plugin": {
-            "include": [
-                "themes/*/composer.json"
-            ],
-            "recurse": false
-        }
     },
     "scripts": {
         "cache-scripts": [
