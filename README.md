@@ -34,13 +34,13 @@ Composer will automatically create a new project based on Roadiz and download ev
 
 Composer script will copy a default configuration file and your entry-points in `web/` folder automatically and a sample `Vagrantfile` in your project root.
 
-### Update
+### Update Roadiz and your own theme assets
 
 ```shell
 composer update -o --no-dev
 
-# Install your theme in public folder using relative symlink (MacOS + Unix)
-# remove --relative flag on Windows
+# Re-install your theme in public folder using relative symlinks (MacOS + Unix)
+# remove --relative flag on Windows to generate absolute symlinks
 bin/roadiz themes:assets:install --symlink --relative FooBar;
 ```
 
