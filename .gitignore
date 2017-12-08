@@ -16,8 +16,11 @@
 /.env
 
 # Roadiz theme
-!/themes/.gitkeep
-/themes/*
+!/themes
+
+# Roadiz themes assets
+/web/themes/*
+!/web/themes/.gitkeep
 
 # Prevent adding default theme
 # You should rename it!
