@@ -27,12 +27,22 @@ This is the **production-ready edition** for Roadiz. It is meant to setup your *
 composer create-project roadiz/standard-edition;
 # Create a new theme for your project
 cd standard-edition;
-bin/roadiz themes:generate FooBar;
+bin/roadiz themes:generate --symlink --relative FooBar;
 ```
 
 Composer will automatically create a new project based on Roadiz and download every dependencies. 
 
-Composer script will copy a default configuration file and your entry-points in `web/` folder automatically and a sample `Vagrantfile` in your project root. 
+Composer script will copy a default configuration file and your entry-points in `web/` folder automatically and a sample `Vagrantfile` in your project root.
+
+### Update
+
+```shell
+composer update -o --no-dev
+
+# Install your theme in public folder using relative symlink (MacOS + Unix)
+# remove --relative flag on Windows
+bin/roadiz themes:assets:install --symlink --relative FooBar;
+```
 
 ### Develop with *Vagrant*
 
