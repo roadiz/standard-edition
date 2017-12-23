@@ -1,0 +1,33 @@
+# Ignore Roadiz tools and cache for
+# creating a docker image
+
+*/temp*
+*/*/temp*
+docker
+.vagrant
+.idea
+app/sessions/*
+app/logs/*
+app/cache/*
+app/gen-src/*
+app/conf/config.yml
+app/*.zip
+app/*.sql
+app/*.tar.gz
+*.zip
+*.sql
+*.log
+*.tar.gz
+themes/*/build
+themes/*/node_modules
+themes/*/app
+*/*/*/node_modules
+files/*
+web/files/*
+*/*/*/src-img
+*/*/src-img
+*/*.log
+Vagrantfile
+pimple.json
+
+!vendor

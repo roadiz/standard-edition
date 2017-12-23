@@ -137,3 +137,9 @@ opcache.max_accelerated_files = 20000
 realpath_cache_size=4096K
 realpath_cache_ttl=600
 ```
+
+### Build a docker image with Gitlab Registry
+
+- Customize `.gitlab-ci.yml` file to reflect your *Gitlab* instance configuration and your *theme* path.
+- Enable *Registry* and *Continuous integration* on your repository settings.
+- Push your code on your *Gitlab* instance

@@ -1,0 +1,68 @@
+image: ruby:2.3
+
+stages:
+  - build
+  - deploy
+
+variables:
+  # Timezone will be used both for system and php date.timezone php.ini value
+  TIMEZONE: "Europe/Paris"
+
+example_build:
+  stage: build
+  image: tetraweb/php:7.1
+  cache:
+    paths:
+      - vendor/
+      # Replace with your own theme path
+      - themes/BaseTheme/node_modules/
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - vendor/
+      # Replace with your own theme path
+      - themes/BaseTheme/
+  before_script:
+    - curl -sL https://deb.nodesource.com/setup_8.x | bash -
+    - apt-get update -qq
+    - apt-get install -y unzip nodejs build-essential
+    - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    - php composer-setup.php
+    - php -r "unlink('composer-setup.php');"
+    - mkdir -p ~/.ssh
+    # Paste the PRIVATE key into a gitlab variable.
+    # Pay attention to the linebreak at the end when pasting
+    # Composer private key is required if you need private dependencies.
+    - echo "$COMPOSER_SERVER_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - eval "$(ssh-agent -s)"
+    - ssh-add ~/.ssh/id_rsa
+    # Use your Gitlab instance URL
+    - ssh-keyscan -H 'gitlab.com' >> ~/.ssh/known_hosts
+  script:
+    # Replace with your own theme path
+    - cd themes/BaseTheme
+    - npm install
+    - npm run build
+    - cd ../../
+    # DO NOT USE --classmap-authoritative as we are going to generate nsentities on the go…
+    - php composer.phar install --no-dev  --optimize-autoloader --apcu-autoloader --no-scripts
+
+#
+# Build App docker image with vendor and built assets
+# included. You must configure your Gitlab Runner to
+# support Docker-in-docker commands.
+#
+example_docker:
+  stage: deploy
+  image: docker:git
+  services:
+    - docker:17.09-dind
+  when: on_success
+  dependencies:
+    - example_build
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker build -t registry.gitlab.com/example/example .
+    - docker push registry.gitlab.com/example/example:latest
+
