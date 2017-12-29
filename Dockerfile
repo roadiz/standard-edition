@@ -1,4 +1,4 @@
-FROM roadiz/php71-nginx-alpine:latest
+FROM roadiz/php72-nginx-alpine:latest
 MAINTAINER Ambroise Maupate <ambroise@rezo-zero.com>
 
 COPY . /var/www/html/
