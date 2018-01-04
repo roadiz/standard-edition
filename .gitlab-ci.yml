@@ -22,6 +22,8 @@ example_build:
       - vendor/
       # Replace with your own theme path
       - themes/BaseTheme/
+      # Keep themes assets to include them in docker image
+      - web/themes/
   before_script:
     - curl -sL https://deb.nodesource.com/setup_8.x | bash -
     - apt-get update -qq
@@ -29,16 +31,17 @@ example_build:
     - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
     - php composer-setup.php
     - php -r "unlink('composer-setup.php');"
-    - mkdir -p ~/.ssh
     # Paste the PRIVATE key into a gitlab variable.
     # Pay attention to the linebreak at the end when pasting
     # Composer private key is required if you need private dependencies.
-    - echo "$COMPOSER_SERVER_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-    - chmod 600 ~/.ssh/id_rsa
-    - eval "$(ssh-agent -s)"
-    - ssh-add ~/.ssh/id_rsa
-    # Use your Gitlab instance URL
-    - ssh-keyscan -H 'gitlab.com' >> ~/.ssh/known_hosts
+    # **Uncomment only if using private composer packages**
+    #- mkdir -p ~/.ssh
+    #- echo "$COMPOSER_SERVER_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    #- chmod 600 ~/.ssh/id_rsa
+    #- eval "$(ssh-agent -s)"
+    #- ssh-add ~/.ssh/id_rsa
+    ## Use your Gitlab instance URL
+    #- ssh-keyscan -H 'gitlab.com' >> ~/.ssh/known_hosts
   script:
     # Replace with your own theme path
     - cd themes/BaseTheme
@@ -47,6 +50,8 @@ example_build:
     - cd ../../
     # DO NOT USE --classmap-authoritative as we are going to generate nsentities on the go…
     - php composer.phar install --no-dev  --optimize-autoloader --apcu-autoloader --no-scripts
+    # Create hard copies of theme assets
+    - php composer.phar run-script pre-docker
 
 #
 # Build App docker image with vendor and built assets
@@ -56,6 +61,9 @@ example_build:
 example_docker:
   stage: deploy
   image: docker:git
+  # Create a docker image only when a new tag is pushed
+  only:
+    - tags
   services:
     - docker:17.09-dind
   when: on_success

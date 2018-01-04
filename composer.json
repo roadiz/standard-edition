@@ -39,6 +39,9 @@
             "php bin/roadiz themes:assets:install Install",
             "php bin/roadiz themes:assets:install Rozier"
         ],
+        "pre-docker": [
+            "php bin/roadiz themes:assets:install Rozier"
+        ],
         "post-install-cmd": [
             "php bin/roadiz composer:post-install",
             "@cache-scripts"
