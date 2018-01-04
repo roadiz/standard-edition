@@ -27,12 +27,22 @@ This is the **production-ready edition** for Roadiz. It is meant to setup your *
 composer create-project roadiz/standard-edition;
 # Create a new theme for your project
 cd standard-edition;
-bin/roadiz themes:generate FooBar;
+bin/roadiz themes:generate --symlink --relative FooBar;
 ```
 
 Composer will automatically create a new project based on Roadiz and download every dependencies. 
 
-Composer script will copy a default configuration file and your entry-points in `web/` folder automatically and a sample `Vagrantfile` in your project root. 
+Composer script will copy a default configuration file and your entry-points in `web/` folder automatically and a sample `Vagrantfile` in your project root.
+
+### Update Roadiz and your own theme assets
+
+```shell
+composer update -o --no-dev
+
+# Re-install your theme in public folder using relative symlinks (MacOS + Unix)
+# remove --relative flag on Windows to generate absolute symlinks
+bin/roadiz themes:assets:install --symlink --relative FooBar;
+```
 
 ### Develop with *Vagrant*
 
@@ -127,3 +137,11 @@ opcache.max_accelerated_files = 20000
 realpath_cache_size=4096K
 realpath_cache_ttl=600
 ```
+
+### Build a docker image with Gitlab Registry
+
+- Customize `.gitlab-ci.yml` file to reflect your *Gitlab* instance configuration and your *theme* path and your project name.
+- Add your theme in *Composer* `pre-docker` scripts to be able to install your assets
+- Add your theme in `.dockerignore` file to include your assets during build
+- Enable *Registry* and *Continuous integration* on your repository settings.
+- Push your code on your *Gitlab* instance. An image build should be triggered after a new tag has been pushed and your build job succeeded.

@@ -3,7 +3,7 @@
     "description": "Roadiz standard edition",
     "type": "project",
     "require": {
-        "roadiz/roadiz": "~0.20.5"
+        "roadiz/roadiz": "0.21.*"
     },
     "license": "MIT",
     "authors": [
@@ -28,21 +28,19 @@
             "app/AppCache.php"
         ]
     },
-    "extra": {
-        "merge-plugin": {
-            "include": [
-                "themes/*/composer.json"
-            ],
-            "recurse": false
-        }
-    },
     "scripts": {
         "cache-scripts": [
             "php bin/roadiz cache:clear -e prod",
             "php bin/roadiz cache:clear -e dev",
             "php bin/roadiz cache:clear -e prod --preview",
             "php bin/roadiz cache:clear-fpm -e prod",
-            "php bin/roadiz cache:clear-fpm -e prod --preview"
+            "php bin/roadiz cache:clear-fpm -e prod --preview",
+            "php bin/roadiz themes:assets:install Debug",
+            "php bin/roadiz themes:assets:install Install",
+            "php bin/roadiz themes:assets:install Rozier"
+        ],
+        "pre-docker": [
+            "php bin/roadiz themes:assets:install Rozier"
         ],
         "post-install-cmd": [
             "php bin/roadiz composer:post-install",

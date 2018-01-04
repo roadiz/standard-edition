@@ -23,7 +23,7 @@ services:
         volumes_from:
             - php
         volumes:
-            - ${ROADIZ_APP_PATH}/docker/nginx/roadiz.conf:/etc/nginx/conf.d/roadiz.conf
+            - ${ROADIZ_APP_PATH}/docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
         depends_on:
             - php
     solr:

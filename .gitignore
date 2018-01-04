@@ -18,6 +18,10 @@
 # Roadiz theme
 !/themes
 
+# Roadiz themes assets
+/web/themes/*
+!/web/themes/.gitkeep
+
 # Prevent adding default theme
 # You should rename it!
 /themes/DefaultTheme
