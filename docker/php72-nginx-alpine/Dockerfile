@@ -1,21 +1,5 @@
 # See https://github.com/docker-library/php/blob/4677ca134fe48d20c820a19becb99198824d78e3/7.0/fpm/Dockerfile
-FROM php:7.2-fpm
-
-MAINTAINER Maxence POUTORD <maxence.poutord@gmail.com>
-
-RUN apt-get update && apt-get install -y \
-    libfreetype6-dev \
-    libjpeg62-turbo-dev \
-    libmcrypt-dev \
-    libxml2-dev \
-    libpng12-dev \
-    libicu-dev \
-    git \
-    unzip \
-    && docker-php-ext-install -j$(nproc) iconv mcrypt \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-configure intl \
-    && docker-php-ext-install -j$(nproc) gd zip intl opcache xml
+FROM roadiz/php72-nginx-alpine
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -26,14 +10,21 @@ RUN rm /etc/localtime
 RUN ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
 RUN "date"
 
-# Type docker-php-ext-install to see available extensions
-RUN docker-php-ext-install -j$(nproc) pdo pdo_mysql
-
 # install xdebug
-RUN pecl install xdebug && \
-    pecl install apcu  && \
-    docker-php-ext-enable xdebug && \
-    docker-php-ext-enable apcu
+RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS git gcc g++ make autoconf \
+    && mkdir /src && cd /src && git clone https://github.com/xdebug/xdebug.git \
+    && cd xdebug \
+    && sh ./rebuild.sh \
+    && echo "[xdebug]" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "zend_extension=xdebug.so" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.remote_port=9000" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.remote_handler=dbgp" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.remote_connect_back=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && cd  / && rm -fr /src \
+    && apk del .build-deps $PHPIZE_DEPS git gcc g++ autoconf \
+    && rm -rf /tmp/*
 
 RUN echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
     echo "display_startup_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
@@ -41,7 +32,6 @@ RUN echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/docker-php-ext-x
     echo "post_max_size = 64M" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
     echo "upload_max_filesize = 64M" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
     echo "memory_limit = 256M" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
-    echo "xdebug.remote_enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
     echo "xdebug.remote_connect_back=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
     echo "xdebug.idekey=\"PHPSTORM\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
     echo "xdebug.remote_port=9001" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
@@ -57,4 +47,4 @@ RUN echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/docker-php-ext-x
 
 RUN ln -s /usr/share/nginx/html/bin/roadiz /usr/local/bin/roadiz
 
-WORKDIR /usr/share/nginx/html
+WORKDIR /var/www/html

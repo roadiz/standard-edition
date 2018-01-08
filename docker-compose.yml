@@ -9,23 +9,15 @@ services:
             MYSQL_DATABASE: ${MYSQL_DATABASE}
             MYSQL_USER: ${MYSQL_USER}
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    php:
-        build: ./docker/php7-fpm
+    app:
+        build: ./docker/php72-nginx-alpine
+        ports:
+            - 80:80
         depends_on:
             - db
             - solr
         volumes:
-            - ${ROADIZ_APP_PATH}:/usr/share/nginx/html:cached
-    nginx:
-        image: nginx
-        ports:
-            - 80:80
-        volumes_from:
-            - php
-        volumes:
-            - ${ROADIZ_APP_PATH}/docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
-        depends_on:
-            - php
+            - ${ROADIZ_APP_PATH}:/var/www/html
     solr:
          image: solr
          ports:

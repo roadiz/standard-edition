@@ -5,7 +5,7 @@ services:
             - roadiz-db-sync:/var/lib/mysql:nocopy # nocopy is important
     php:
         volumes:
-            - roadiz-php-sync:/usr/share/nginx/html:nocopy #  nocopy is important
+            - roadiz-php-sync:/var/www/html:nocopy #  nocopy is important
     solr:
         volumes:
             - roadiz-solr-sync:/opt/solr/server/solr/mycores:nocopy #  nocopy is important
