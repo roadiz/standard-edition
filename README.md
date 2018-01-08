@@ -102,6 +102,18 @@ yarn;
 npm install;
 ```
 
+#### Install your theme assets and execute Roadiz commands
+
+You can directly use `bin/roadiz` command through `docker-compose exec`:
+
+```bash
+# Install Rozier back-office assets
+docker-compose exec app bin/roadiz themes:assets:install Rozier
+
+# Install your theme assets as relative symlinks
+docker-compose exec app bin/roadiz themes:assets:install --symlink --relative FooBar
+```
+
 #### On Mac or Windows
 
 Unfortunately, on *macOS* and *Windows* performances will be worse than *Vagrant* due to
