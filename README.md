@@ -119,7 +119,7 @@ docker-compose exec -u www-data app bin/roadiz themes:assets:install --symlink -
 Pay attention that *PHP* is running with *www-data* user. Linux docker host must
 update the `docker/php72-nginx-alpine/Dockerfile` file to reflect your local user **UID**.
 
-Update line: `usermod -u 1000 www-data` using your on UID, you can find it with `id` command.
+Update line: `&& usermod -u 1000 www-data \` using your on UID, you can find it with `id` command.
 
 #### On Mac or Windows
 

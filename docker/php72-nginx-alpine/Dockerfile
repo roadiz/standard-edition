@@ -7,11 +7,10 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
     composer --version && \
     rm /etc/localtime && \
     ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime && \
-    "date" && \
-    usermod -u 1000 www-data
+    "date"
 
 # install xdebug
-RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS git gcc g++ make autoconf \
+RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS git gcc g++ make autoconf shadow \
     && mkdir /src && cd /src && git clone https://github.com/xdebug/xdebug.git \
     && cd xdebug \
     && sh ./rebuild.sh \
@@ -22,6 +21,7 @@ RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS git gcc g++ make autoc
     && echo "xdebug.remote_port=9000" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.remote_handler=dbgp" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.remote_connect_back=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && usermod -u 1000 www-data \
     && cd  / && rm -fr /src \
     && apk del .build-deps $PHPIZE_DEPS git gcc g++ autoconf \
     && rm -rf /tmp/*
