@@ -2,13 +2,13 @@
 FROM roadiz/php72-nginx-alpine
 
 # Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-RUN composer --version
-
-# Set timezone
-RUN rm /etc/localtime
-RUN ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
-RUN "date"
+# And use local user as www-data
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+    composer --version && \
+    rm /etc/localtime && \
+    ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime && \
+    "date" && \
+    usermod -u 1000 www-data
 
 # install xdebug
 RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS git gcc g++ make autoconf \
@@ -47,4 +47,5 @@ RUN echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/docker-php-ext-x
 
 RUN ln -s /usr/share/nginx/html/bin/roadiz /usr/local/bin/roadiz
 
+VOLUME /var/www/html
 WORKDIR /var/www/html

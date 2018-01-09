@@ -108,11 +108,18 @@ You can directly use `bin/roadiz` command through `docker-compose exec`:
 
 ```bash
 # Install Rozier back-office assets
-docker-compose exec app bin/roadiz themes:assets:install Rozier
+docker-compose exec -u www-data app bin/roadiz themes:assets:install Rozier
 
 # Install your theme assets as relative symlinks
-docker-compose exec app bin/roadiz themes:assets:install --symlink --relative FooBar
+docker-compose exec -u www-data app bin/roadiz themes:assets:install --symlink --relative FooBar
 ```
+
+#### On Linux
+
+Pay attention that *PHP* is running with *www-data* user. Linux docker host must
+update the `docker/php72-nginx-alpine/Dockerfile` file to reflect your local user **UID**.
+
+Update line: `usermod -u 1000 www-data` using your on UID, you can find it with `id` command.
 
 #### On Mac or Windows
 
