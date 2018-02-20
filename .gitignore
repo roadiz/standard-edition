@@ -11,6 +11,7 @@
 /web/dev.php
 /web/install.php
 /web/clear_cache.php
+/web/assets
 /pimple.json
 /.data
 /.env
