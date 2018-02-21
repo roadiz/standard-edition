@@ -49,3 +49,4 @@ RUN ln -s /usr/share/nginx/html/bin/roadiz /usr/local/bin/roadiz
 
 VOLUME /var/www/html
 WORKDIR /var/www/html
+
