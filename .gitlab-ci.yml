@@ -11,6 +11,9 @@ variables:
 example_build:
   stage: build
   image: tetraweb/php:7.1
+  only:
+    - develop
+    - tags
   cache:
     paths:
       - vendor/
@@ -25,6 +28,9 @@ example_build:
       # Keep themes assets to include them in docker image
       - web/themes/
   before_script:
+    - docker-php-ext-enable intl
+    - docker-php-ext-enable gd
+    - docker-php-ext-enable pdo_mysql
     - curl -sL https://deb.nodesource.com/setup_8.x | bash -
     - apt-get update -qq
     - apt-get install -y unzip nodejs build-essential

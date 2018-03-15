@@ -3,7 +3,12 @@
     "description": "Roadiz standard edition",
     "type": "project",
     "require": {
-        "roadiz/roadiz": "0.21.*"
+        "roadiz/roadiz": "0.22.*"
+    },
+    "config": {
+        "platform": {
+            "php": "5.6.1"
+        }
     },
     "license": "MIT",
     "authors": [
