@@ -11,6 +11,9 @@ variables:
 example_build:
   stage: build
   image: tetraweb/php:7.1
+  only:
+    - develop
+    - tags
   cache:
     paths:
       - vendor/
