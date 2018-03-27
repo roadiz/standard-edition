@@ -58,6 +58,8 @@ example_build:
     - php composer.phar install --no-dev  --optimize-autoloader --apcu-autoloader --no-scripts
     # Create hard copies of theme assets
     - php composer.phar run-script pre-docker
+    # Remove useless node_modules
+    - rm -rf themes/BaseTheme/node_modules
 
 #
 # Build App docker image with vendor and built assets
