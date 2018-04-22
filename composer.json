@@ -48,16 +48,27 @@
             "php bin/roadiz themes:assets:install Rozier"
         ],
         "post-install-cmd": [
-            "php bin/roadiz composer:post-install",
+            "RZ\\Roadiz\\Utils\\Composer\\InstallFiles\\ScriptHandler::install",
             "@cache-scripts"
         ],
         "post-update-cmd": [
-            "php bin/roadiz composer:post-update",
+            "RZ\\Roadiz\\Utils\\Composer\\InstallFiles\\ScriptHandler::install",
             "@cache-scripts"
         ],
         "post-create-project-cmd": [
-            "php bin/roadiz composer:post-create-project",
+            "RZ\\Roadiz\\Utils\\Composer\\InstallFiles\\ScriptHandler::install",
             "@cache-scripts"
         ]
+    },
+    "extra": {
+        "install-files": {
+            "app/conf/config.default.yml": "./app/conf/config.yml",
+            "samples/clear_cache.php.sample": "./web/clear_cache.php",
+            "samples/install.php.sample": "./web/install.php",
+            "samples/dev.php.sample": "./web/dev.php",
+            "samples/index.php.sample": "./web/index.php",
+            "samples/preview.php.sample": "./web/preview.php",
+            "samples/Vagrantfile.sample": "./Vagrantfile"
+        }
     }
 }

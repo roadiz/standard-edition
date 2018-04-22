@@ -19,6 +19,9 @@ cacheDriver:
     port: ~
 security:
     secret: "change#this#secret#very#important"
+    session_name: roadiz_token
+    session_cookie_secure: false
+    session_cookie_httponly: true
 mailer:
     type: ~
     host: "localhost"
