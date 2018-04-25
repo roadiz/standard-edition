@@ -17,8 +17,6 @@ example_build:
   cache:
     paths:
       - vendor/
-      # Replace with your own theme path
-      - themes/BaseTheme/node_modules/
   artifacts:
     expire_in: 1 hour
     paths:
@@ -55,9 +53,13 @@ example_build:
     - npm run build
     - cd ../../
     # DO NOT USE --classmap-authoritative as we are going to generate nsentities on the go…
-    - php composer.phar install --no-dev  --optimize-autoloader --apcu-autoloader --no-scripts
+    - php composer.phar install --no-dev --optimize-autoloader --apcu-autoloader
     # Create hard copies of theme assets
     - php composer.phar run-script pre-docker
+    # Remove useless node_modules
+    - rm -rf themes/BaseTheme/node_modules
+    - rm -rf web/dev.php
+    - rm -rf web/install.php
 
 #
 # Build App docker image with vendor and built assets
