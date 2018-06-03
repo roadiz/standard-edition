@@ -3,7 +3,9 @@
     "description": "Roadiz standard edition",
     "type": "project",
     "require": {
-        "roadiz/roadiz": "0.22.*"
+        "roadiz/roadiz": "dev-develop",
+        "roadiz/documents": "dev-develop",
+        "roadiz/models": "dev-develop"
     },
     "config": {
         "platform": {
