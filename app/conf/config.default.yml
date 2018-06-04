@@ -53,3 +53,30 @@ assetsProcessing:
     jpegoptimPath: ~
     pngquantPath: ~
     subscribers: []
+#
+# Solr endpoint example
+#
+#solr:
+#    endpoint:
+#        localhost:
+#            host: "localhost"
+#            port: "8983"
+#            path: "/solr"
+#            core: "mycore"
+#            timeout: 3
+#            username: ""
+#            password: ""
+
+#
+# Reverse proxy invalidation
+#
+#reverseProxyCache:
+#    frontend:
+#        localhost:
+#            host: localhost
+#            domainName: myapp.test
+#
+#        external:
+#            host: varnish
+#            domainName: myapp.test
+
