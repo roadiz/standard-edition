@@ -57,7 +57,8 @@ example_build:
     - npm run build
     - cd ../../
     # DO NOT USE --classmap-authoritative as we are going to generate nsentities on the go…
-    - php composer.phar install --no-dev --optimize-autoloader --apcu-autoloader
+    - php composer.phar install --no-dev --optimize-autoloader --apcu-autoloader --no-scripts
+    - php composer.phar run-script post-install-cmd
     # Create hard copies of theme assets
     - php composer.phar run-script pre-docker
     # Remove useless node_modules
