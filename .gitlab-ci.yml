@@ -51,10 +51,10 @@ example_build:
   script:
     # Replace with your own theme path
     - cd themes/BaseTheme
-    - npm install
+    - yarn install
     # Using Yarn with yarn.lock
     #- yarn install --pure-lockfile
-    - npm run build
+    - yarn run build
     - cd ../../
     # DO NOT USE --classmap-authoritative as we are going to generate nsentities on the go…
     - php composer.phar install --no-dev --optimize-autoloader --apcu-autoloader --no-scripts
