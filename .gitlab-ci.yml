@@ -10,7 +10,7 @@ variables:
 
 example_build:
   stage: build
-  image: tetraweb/php:7.1
+  image: roadiz/php72-runner
   only:
     - develop
     - tags
@@ -26,17 +26,6 @@ example_build:
       # Keep themes assets to include them in docker image
       - web/themes/
   before_script:
-    - docker-php-ext-enable intl
-    - docker-php-ext-enable gd
-    - docker-php-ext-enable pdo_mysql
-    - curl -sL https://deb.nodesource.com/setup_8.x | bash -
-    - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-    - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-    - apt-get update -qq
-    - apt-get install -y unzip nodejs yarn build-essential
-    - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-    - php composer-setup.php
-    - php -r "unlink('composer-setup.php');"
     # Paste the PRIVATE key into a gitlab variable.
     # Pay attention to the linebreak at the end when pasting
     # Composer private key is required if you need private dependencies.
