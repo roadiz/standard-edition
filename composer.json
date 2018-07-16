@@ -3,13 +3,14 @@
     "description": "Roadiz standard edition",
     "type": "project",
     "require": {
+        "php": ">=7.1",
         "roadiz/roadiz": "dev-develop",
         "roadiz/documents": "dev-develop",
         "roadiz/models": "dev-develop"
     },
     "config": {
         "platform": {
-            "php": "5.6.1"
+            "php": "7.1"
         }
     },
     "license": "MIT",
