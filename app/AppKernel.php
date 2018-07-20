@@ -12,15 +12,11 @@ class AppKernel extends \RZ\Roadiz\Core\Kernel
      */
     public function getRootDir()
     {
-        return ROADIZ_ROOT . '/app';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getVendorDir()
-    {
-        return ROADIZ_ROOT . '/vendor';
+        if (null === $this->rootDir) {
+            $r = new \ReflectionObject($this);
+            $this->rootDir = dirname($r->getFileName());
+        }
+        return $this->rootDir;
     }
 
     /**
@@ -28,7 +24,7 @@ class AppKernel extends \RZ\Roadiz\Core\Kernel
      */
     public function getPublicDir()
     {
-        return ROADIZ_ROOT . '/web';
+        return $this->getProjectDir() . '/web';
     }
 
     /**
@@ -44,7 +40,7 @@ class AppKernel extends \RZ\Roadiz\Core\Kernel
      */
     public function getPrivateFilesPath()
     {
-        return ROADIZ_ROOT . $this->getPrivateFilesBasePath();
+        return $this->getProjectDir() . $this->getPrivateFilesBasePath();
     }
 
     /**
@@ -52,7 +48,7 @@ class AppKernel extends \RZ\Roadiz\Core\Kernel
      */
     public function getFontsFilesPath()
     {
-        return ROADIZ_ROOT . $this->getFontsFilesBasePath();
+        return $this->getProjectDir() . $this->getFontsFilesBasePath();
     }
 
     /**

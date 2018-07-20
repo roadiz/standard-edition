@@ -40,10 +40,10 @@ if (version_compare(phpversion(), '5.6.0', '<')) {
     echo 'You need a least PHP version 5.6.0.' . PHP_EOL;
     exit(1);
 }
-
+/** @deprecated Use Kernel::getProjectDir()  */
 define('ROADIZ_ROOT', dirname(realpath(__DIR__)));
 // Include Composer Autoload (relative to project root).
-require ROADIZ_ROOT . "/vendor/autoload.php";
+require dirname(realpath(__DIR__)) . "/vendor/autoload.php";
 
 $input = new ArgvInput();
 $env = $input->getParameterOption(array('--env', '-e'), getenv('ROADIZ_ENV') ?: 'dev');
@@ -55,6 +55,5 @@ if ($debug) {
 }
 
 $kernel = new AppKernel($env, $debug, $preview);
-
 $application = new RoadizApplication($kernel);
 $application->run($input);
