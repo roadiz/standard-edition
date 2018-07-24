@@ -4,9 +4,7 @@
     "type": "project",
     "require": {
         "php": ">=7.1",
-        "roadiz/roadiz": "dev-develop",
-        "roadiz/documents": "dev-develop",
-        "roadiz/models": "dev-develop"
+        "roadiz/roadiz": "~1.0.0"
     },
     "config": {
         "platform": {
