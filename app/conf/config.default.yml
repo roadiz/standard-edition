@@ -11,6 +11,8 @@ doctrine:
     default_table_options:
         charset: utf8mb4
         collate: utf8mb4_unicode_ci
+# Register here your themes…
+themes: []
 # http://symfony.com/doc/current/reference/configuration/doctrine.html#caching-drivers
 # If null or empty, Roadiz will try to detect best cache driver available
 cacheDriver:
@@ -22,6 +24,14 @@ security:
     session_name: roadiz_token
     session_cookie_secure: false
     session_cookie_httponly: true
+# For Vagrant MailCatcher
+#mailer:
+#    type: smtp
+#    host: "localhost"
+#    port: 1025
+#    encryption: false
+#    username: ""
+#    password: ""
 mailer:
     type: ~
     host: "localhost"
@@ -53,3 +63,30 @@ assetsProcessing:
     jpegoptimPath: ~
     pngquantPath: ~
     subscribers: []
+#
+# Solr endpoint example
+#
+#solr:
+#    endpoint:
+#        localhost:
+#            host: "localhost"
+#            port: "8983"
+#            path: "/solr"
+#            core: "mycore"
+#            timeout: 3
+#            username: ""
+#            password: ""
+
+#
+# Reverse proxy invalidation
+#
+#reverseProxyCache:
+#    frontend:
+#        localhost:
+#            host: localhost
+#            domainName: myapp.test
+#
+#        external:
+#            host: varnish
+#            domainName: myapp.test
+

@@ -35,10 +35,10 @@ if (version_compare(phpversion(), '5.6.0', '<')) {
     echo 'You need a least PHP version 5.6.0';
     exit(1);
 }
-
+/** @deprecated Use Kernel::getProjectDir()  */
 define('ROADIZ_ROOT', dirname(__DIR__));
 // Include Composer Autoload (relative to project root).
-require(ROADIZ_ROOT . "/vendor/autoload.php");
+require(dirname(__DIR__) . "/vendor/autoload.php");
 
 $kernel = new AppKernel('prod', false);
 $request = Request::createFromGlobals();
