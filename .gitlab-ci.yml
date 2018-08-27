@@ -7,6 +7,7 @@ stages:
 variables:
   # Timezone will be used both for system and php date.timezone php.ini value
   TIMEZONE: "Europe/Paris"
+  # SENTRY_URL: "https://sentry.yourdomain.com/api/hooks/release/builtin/x/xxxxx/"
 
 example_build:
   stage: build
@@ -71,6 +72,9 @@ example_docker:
   when: on_success
   dependencies:
     - example_build
+  before_script:
+    # Need curl for pushing release to Sentry
+    - apk add curl
   script:
     # Connect to your Gitlab Registry
     - "echo \"Registry image: ${CI_REGISTRY_IMAGE} for tag ${CI_COMMIT_TAG}\""
@@ -80,5 +84,7 @@ example_docker:
     - "docker tag ${CI_REGISTRY_IMAGE} ${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}"
     - "docker push ${CI_REGISTRY_IMAGE}:latest"
     - "docker push ${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}"
+    # Create Release on your app on Sentry
+    # - "curl ${SENTRY_URL} -X POST -H \"Content-Type: application/json\" -d \"{\\\"version\\\": \\\"${CI_COMMIT_TAG}\\\"}\""
 
 

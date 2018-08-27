@@ -51,7 +51,7 @@ $request = Request::createFromGlobals();
 
 // Using Front Proxy (HA or Docker)
 // Trust incoming request IP as your reverse proxy
-// Request::setTrustedProxies([$request->server->get('REMOTE_ADDR')]);
+// Request::setTrustedProxies([$request->server->get('REMOTE_ADDR')], Request::HEADER_X_FORWARDED_ALL);
 
 $response = $kernel->handle($request);
 $response->send();
