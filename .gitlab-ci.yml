@@ -18,7 +18,7 @@ example_test:
     - tags
   cache:
     paths:
-    - vendor/
+      - vendor/
   script:
     - composer install --dev --no-scripts
     - composer run-script post-install-cmd
