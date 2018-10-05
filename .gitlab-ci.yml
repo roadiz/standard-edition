@@ -1,6 +1,7 @@
 image: ruby:2.3
 
 stages:
+  - test
   - build
   - deploy
 
@@ -9,6 +10,21 @@ variables:
   TIMEZONE: "Europe/Paris"
   # SENTRY_URL: "https://sentry.yourdomain.com/api/hooks/release/builtin/x/xxxxx/"
 
+example_test:
+  stage: test
+  image: roadiz/php72-runner
+  only:
+    - develop
+    - tags
+  cache:
+    paths:
+      - vendor/
+  script:
+    - composer install --dev --no-scripts
+    - composer run-script post-install-cmd
+    - vendor/bin/phpcs --extensions=php --warning-severity=0 --standard=PSR2 -p ./web
+    - vendor/bin/phpcs --extensions=php --warning-severity=0 --standard=PSR2 -p ./themes
+    
 example_build:
   stage: build
   image: roadiz/php72-runner
@@ -41,6 +57,9 @@ example_build:
   script:
     # Replace with your own theme path
     - cd themes/BaseTheme
+    # If you’re using Sass, install it locally
+    # https://github.com/sass/node-sass/issues/1980
+    - yarn add node-sass
     - yarn install
     # Using Yarn with yarn.lock
     #- yarn install --pure-lockfile

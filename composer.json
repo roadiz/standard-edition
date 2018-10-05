@@ -4,7 +4,10 @@
     "type": "project",
     "require": {
         "php": ">=7.1",
-        "roadiz/roadiz": "~1.0.0"
+        "roadiz/roadiz": "~1.0.5"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.3"
     },
     "config": {
         "platform": {
