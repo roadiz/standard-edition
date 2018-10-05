@@ -15,6 +15,7 @@ and distribute its code for personal and commercial projects.
 * *Roadiz* website: http://www.roadiz.io
 * *Read the Docs* documentation can be found at http://docs.roadiz.io
 * *API* documentation can be found at http://api.roadiz.io
+* *Forum* can be found at https://ask.roadiz.io
 
 ## Standard edition
 
