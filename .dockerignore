@@ -34,5 +34,6 @@ pimple.json
 !app/gen-src/GeneratedNodeSources/.gitignore
 !app/gen-src/Proxies/.gitignore
 !themes/BaseTheme/static
+!themes/BaseTheme/Resources/views/partials/*
 !web/themes/*
 
