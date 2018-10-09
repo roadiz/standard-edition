@@ -23,7 +23,7 @@ This is the **production-ready edition** for Roadiz. It is meant to setup your *
 
 ## Usage
 
-```shell
+```bash
 # Create a new Roadiz project on develop branch
 composer create-project roadiz/standard-edition;
 # Create a new theme for your project
@@ -37,7 +37,7 @@ Composer script will copy a default configuration file and your entry-points in 
 
 ### Update Roadiz and your own theme assets
 
-```shell
+```bash
 composer update -o --no-dev
 
 # Re-install your theme in public folder using relative symlinks (MacOS + Unix)
@@ -145,7 +145,7 @@ You can follow the already [well-documented article on *Performance* tuning for 
 
 ### Optimize class autoloader
 
-```shell
+```bash
 composer dump-autoload --optimize --no-dev --classmap-authoritative
 ```
 
@@ -158,10 +158,29 @@ realpath_cache_size=4096K
 realpath_cache_ttl=600
 ```
 
-### Build a docker image with Gitlab Registry
+## Build a docker image with Gitlab Registry
 
-- Customize `.gitlab-ci.yml` file to reflect your *Gitlab* instance configuration and your *theme* path and your project name.
-- Add your theme in *Composer* `pre-docker` scripts to be able to install your assets
-- Add your theme in `.dockerignore` file to include your assets during build
-- Enable *Registry* and *Continuous integration* on your repository settings.
-- Push your code on your *Gitlab* instance. An image build should be triggered after a new tag has been pushed and your build job succeeded.
+You can create a standalone *Docker* image with your Roadiz project thanks to our `roadiz/php72-nginx-alpine` base image, a continuous integration tool such as *Gitlab CI* and a private *Docker* registry. All your theme assets will be compiled in a controlled environment and your production website will have a minimal downtime at each update.
+
+Make sure you don’t ignore `package.lock` or `yarn.lock` in your themes not to get dependency errors when your CI system will compile your theme assets. You may do the same for your project `composer.lock` to make sure that you’ll use the same dependencies version in dev as well as in your CI jobs.
+
+Standard-edition provides a basic configuration set with a `Dockerfile`:
+
+1. Customize `.gitlab-ci.yml` file to reflect your *Gitlab* instance configuration and your *theme* path and your project name.
+2. Add your theme in *Composer* `pre-docker` scripts to be able to install your theme assets into `web/` during Docker build:
+
+```
+php bin/roadiz themes:assets:install MyTheme
+```
+
+3. Add your theme in `.dockerignore` file to include your assets during build, update the following lines to force ignored files into your Docker image:
+   
+```
+!themes/BaseTheme/static
+!themes/BaseTheme/Resources/views/partials/*
+```
+
+4. Enable *Registry* and *Continuous integration* on your repository settings.
+5. Push your code on your *Gitlab* instance. An image build should be triggered after a new **tag** has been pushed and your test and build jobs succeeded.
+
+
