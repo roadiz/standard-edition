@@ -51,6 +51,10 @@ clean :
 uninstall : clean
 	rm -rf ./themes/${THEME}/node_modules;
 	@echo "✅\t${GREEN}Removed NPM dependencies. \tOK.${NC}" >&2;
+# Launch PHP internal server (for dev purpose only)
+dev-server:
+	@echo "✅\t${GREEN}Launching PHP dev server in web/ folder${NC}" >&2;
+	php -S 0.0.0.0:8081 -t web vendor/roadiz/roadiz/conf/router.php
 #
 # Test if required binaries are available
 #
