@@ -13,6 +13,8 @@ UPDATE_CMD="`yarn upgrade`"
 # Or use NPM
 #INSTALL_CMD="`npm install`"
 #UPDATE_CMD="`npm update`"
+# Use a local available port
+DEV_DOMAIN="0.0.0.0:8081"
 
 # Default task install + build
 all : configtest install build cache
@@ -29,8 +31,8 @@ cache :
 	bin/roadiz cache:clear
 	bin/roadiz cache:clear -e prod
 	bin/roadiz cache:clear -e prod --preview
-	bin/roadiz cache:clear-fpm -e prod -d 0.0.0.0:8081
-	bin/roadiz cache:clear-fpm -e prod --preview -d 0.0.0.0:8081
+	bin/roadiz cache:clear-fpm -e prod -d ${DEV_DOMAIN}
+	bin/roadiz cache:clear-fpm -e prod --preview -d ${DEV_DOMAIN}
 
 # Launch Gulp watch task
 watch : configtest
@@ -54,7 +56,7 @@ uninstall : clean
 # Launch PHP internal server (for dev purpose only)
 dev-server:
 	@echo "✅\t${GREEN}Launching PHP dev server in web/ folder${NC}" >&2;
-	php -S 0.0.0.0:8081 -t web vendor/roadiz/roadiz/conf/router.php
+	php -S ${DEV_DOMAIN} -t web vendor/roadiz/roadiz/conf/router.php
 #
 # Test if required binaries are available
 #
