@@ -29,8 +29,8 @@ cache :
 	bin/roadiz cache:clear
 	bin/roadiz cache:clear -e prod
 	bin/roadiz cache:clear -e prod --preview
-	bin/roadiz cache:clear-fpm -e prod
-	bin/roadiz cache:clear-fpm -e prod --preview
+	bin/roadiz cache:clear-fpm -e prod -d 0.0.0.0:8081
+	bin/roadiz cache:clear-fpm -e prod --preview -d 0.0.0.0:8081
 
 # Launch Gulp watch task
 watch : configtest
