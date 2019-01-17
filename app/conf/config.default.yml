@@ -7,6 +7,9 @@ doctrine:
     user: ""
     password: ""
     dbname: ""
+    # "utf8mb4" charset requires at least mysql 5.7
+    # due to large index requirement.
+    # otherwise change it to "utf8"
     charset: utf8mb4
     default_table_options:
         charset: utf8mb4
@@ -14,9 +17,9 @@ doctrine:
 # Register here your themes…
 themes: []
 # http://symfony.com/doc/current/reference/configuration/doctrine.html#caching-drivers
-# If null or empty, Roadiz will try to detect best cache driver available
+# If null or empty, Roadiz will use ArrayCache
 cacheDriver:
-    type: ~
+    type: apcu
     host: ~
     port: ~
 security:
@@ -33,7 +36,8 @@ security:
 #    username: ""
 #    password: ""
 mailer:
-    type: ~
+    # Do not use NULL mailer type.
+    type: smtp
     host: "localhost"
     port: 25
     encryption: false

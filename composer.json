@@ -4,7 +4,7 @@
     "type": "project",
     "require": {
         "php": ">=7.1",
-        "roadiz/roadiz": "~1.0.5"
+        "roadiz/roadiz": "~1.0.19"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.3"
@@ -13,6 +13,12 @@
         "platform": {
             "php": "7.1"
         }
+    },
+    "suggest": {
+        "sentry/sentry": "Allows monolog to send your log messages to a Sentry instance.",
+        "roadiz/abstract-blog-theme": "Enhance your theme with many useful blog features.",
+        "roadiz/abstract-pdf-theme": "Enhance your theme with PDF generation features.",
+        "roadiz/abstract-api-theme": "Add minimal security to your theme custom public API."
     },
     "license": "MIT",
     "authors": [
