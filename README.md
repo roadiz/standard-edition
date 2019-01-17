@@ -45,6 +45,17 @@ composer update -o --no-dev
 bin/roadiz themes:assets:install --symlink --relative FooBar;
 ```
 
+### Develop with *PHP* internal server
+
+````bash
+# Edit your Makefile "DEV_DOMAIN" variable to use a dedicated port
+# to your project and your theme name.
+nano Makefile;
+
+# Launch PHP server
+make dev-server;
+````
+
 ### Develop with *Vagrant*
 
 For development, here are some useful commands: 
@@ -59,7 +70,7 @@ nano Vagrantfile;
 # in one command
 nano Makefile; 
 cd themes/FooBarTheme;
-# Install NPM dependenecies for your front-end dev environment.
+# Install NPM dependencies for your front-end dev environment.
 # Use YARN
 yarn;
 # OR use vanilla NPM
@@ -96,7 +107,7 @@ docker-compose up -d;
 # in one command
 nano Makefile; 
 cd themes/FooBarTheme;
-# Install NPM dependenecies for your front-end dev environment.
+# Install NPM dependencies for your front-end dev environment.
 # Use YARN
 yarn;
 # OR use vanilla NPM

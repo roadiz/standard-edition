@@ -53,10 +53,20 @@ clean :
 uninstall : clean
 	rm -rf ./themes/${THEME}/node_modules;
 	@echo "✅\t${GREEN}Removed NPM dependencies. \tOK.${NC}" >&2;
+
 # Launch PHP internal server (for dev purpose only)
 dev-server:
 	@echo "✅\t${GREEN}Launching PHP dev server in web/ folder${NC}" >&2;
 	php -S ${DEV_DOMAIN} -t web vendor/roadiz/roadiz/conf/router.php
+
+# Migrate your configured theme, update DB and empty caches.
+migrate:
+	@echo "✅\t${GREEN}Update schema node-types${NC}" >&2;
+	bin/roadiz themes:install --data /Themes/${THEME}/${THEME}App;
+	bin/roadiz generate:nsentities;
+	bin/roadiz orm:schema-tool:update --dump-sql --force;
+	make cache;
+
 #
 # Test if required binaries are available
 #
