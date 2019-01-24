@@ -129,7 +129,7 @@ docker-compose exec -u www-data app bin/roadiz themes:assets:install --symlink -
 #### On Linux
 
 Pay attention that *PHP* is running with *www-data* user. Linux docker host must
-update the `docker/php72-nginx-alpine/Dockerfile` file to reflect your local user **UID**.
+update the `docker/php73-nginx-alpine/Dockerfile` file to reflect your local user **UID**.
 
 Update line: `&& usermod -u 1000 www-data \` using your on UID, you can find it with `id` command.
 
@@ -171,7 +171,7 @@ realpath_cache_ttl=600
 
 ## Build a docker image with Gitlab Registry
 
-You can create a standalone *Docker* image with your Roadiz project thanks to our `roadiz/php72-nginx-alpine` base image, a continuous integration tool such as *Gitlab CI* and a private *Docker* registry. All your theme assets will be compiled in a controlled environment and your production website will have a minimal downtime at each update.
+You can create a standalone *Docker* image with your Roadiz project thanks to our `roadiz/php73-nginx-alpine` base image, a continuous integration tool such as *Gitlab CI* and a private *Docker* registry. All your theme assets will be compiled in a controlled environment and your production website will have a minimal downtime at each update.
 
 Make sure you don’t ignore `package.lock` or `yarn.lock` in your themes not to get dependency errors when your CI system will compile your theme assets. You may do the same for your project `composer.lock` to make sure that you’ll use the same dependencies version in dev as well as in your CI jobs.
 

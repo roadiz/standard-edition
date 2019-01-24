@@ -10,7 +10,7 @@ services:
             MYSQL_USER: ${MYSQL_USER}
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     app:
-        build: ./docker/php72-nginx-alpine
+        build: ./docker/php73-nginx-alpine
         ports:
             - 80:80
         depends_on:
