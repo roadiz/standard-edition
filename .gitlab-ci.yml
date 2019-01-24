@@ -12,7 +12,7 @@ variables:
 
 example_test:
   stage: test
-  image: roadiz/php72-runner
+  image: roadiz/php73-runner
   only:
     - develop
     - tags
@@ -24,10 +24,10 @@ example_test:
     - composer run-script post-install-cmd
     - vendor/bin/phpcs --extensions=php --warning-severity=0 --standard=PSR2 -p ./web
     - vendor/bin/phpcs --extensions=php --warning-severity=0 --standard=PSR2 -p ./themes
-    
+
 example_build:
   stage: build
-  image: roadiz/php72-runner
+  image: roadiz/php73-runner
   only:
     - develop
     - tags
