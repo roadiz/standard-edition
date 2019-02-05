@@ -18,6 +18,8 @@ services:
             - solr
         volumes:
             - ${ROADIZ_APP_PATH}:/var/www/html
+        environment:
+            USE_APP_CACHE: ${USE_APP_CACHE}
     solr:
          image: solr
          ports:
