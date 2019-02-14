@@ -6,7 +6,8 @@ GREEN=\033[0;32m
 RED=\033[0;31m
 # No Color
 NC=\033[0m
-THEME=BaseTheme
+THEME_PREFIX=Base
+THEME=${THEME_PREFIX}Theme
 # Use Yarn
 INSTALL_CMD="`yarn`"
 UPDATE_CMD="`yarn upgrade`"
@@ -15,6 +16,13 @@ UPDATE_CMD="`yarn upgrade`"
 #UPDATE_CMD="`npm update`"
 # Use a local available port
 DEV_DOMAIN="0.0.0.0:8081"
+
+# TODO: Change FTP credentials
+# if you want to deploy old-school style
+REMOTE_FTP_PATH="/path/to/server/root"
+REMOTE_FTP_USER="ftp-user"
+REMOTE_FTP_PASS="ftp-secret"
+REMOTE_FTP_HOST="ftp-host"
 
 # Default task install + build
 all : configtest install build cache
@@ -66,6 +74,25 @@ migrate:
 	bin/roadiz generate:nsentities;
 	bin/roadiz orm:schema-tool:update --dump-sql --force;
 	make cache;
+
+push-prod:
+	composer update -o --prefer-dist
+	bin/roadiz generate:htaccess
+	bin/roadiz themes:assets:install ${THEME_PREFIX}
+	lftp -e "mirror --only-newer --parallel=3 -R \
+		--exclude '/\..+/$$' \
+		-x 'app/conf/config\.yml' \
+		-x '\.env' \
+		-x '(\.dockerignore|\.editorconfig|\.env\.dist|\.gitignore|\.gitlab\-ci\.yml|composer\.json|composer\.lock|docker\-compose\.yml|docker\-compose\-dev\.yml|docker\-sync\.yml|Dockerfile|Makefile|README\.md|LICENSE\.md|Vagrantfile)' \
+		-x '(bin|docker|samples|tmp|\.git|\.idea|files)/' \
+		-x 'app/(cache|logs|sessions|tmp)/' \
+		-x 'web/files/' \
+		-x 'node_modules/' \
+		-x 'bower_components/' \
+		-x 'themes/${THEME}/(app|node_modules|webpack)/' \
+		-x '\.(psd|rev|log|cmd|bat|pif|scr|exe|c?sh|reg|vb?|ws?|sql|db|db3)$$' \
+		./ ${REMOTE_FTP_PATH}" -u ${REMOTE_FTP_USER},${REMOTE_FTP_PASS} ${REMOTE_FTP_HOST}
+	bin/roadiz themes:assets:install --relative --symlink ${THEME_PREFIX}
 
 #
 # Test if required binaries are available

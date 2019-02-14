@@ -3,16 +3,13 @@
     "description": "Roadiz standard edition",
     "type": "project",
     "require": {
-        "php": ">=7.1",
-        "roadiz/roadiz": "~1.1.0"
+        "php": ">=7.1.3",
+        "roadiz/roadiz": "dev-develop",
+        "roadiz/models": "dev-develop",
+        "roadiz/documents": "dev-develop"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.3"
-    },
-    "config": {
-        "platform": {
-            "php": "7.1"
-        }
     },
     "suggest": {
         "sentry/sentry": "Allows monolog to send your log messages to a Sentry instance.",
