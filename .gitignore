@@ -125,3 +125,6 @@ testDir/
 
 ## XDebug profile folder
 /.xdebug
+
+### PHPCodeSniffer ###
+/.phpcs-cache
