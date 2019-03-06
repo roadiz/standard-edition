@@ -20,10 +20,9 @@ example_test:
     paths:
       - vendor/
   script:
-    - composer install --dev --no-scripts
+    - composer install --no-scripts
     - composer run-script post-install-cmd
-    - vendor/bin/phpcs --extensions=php --warning-severity=0 --standard=PSR2 -p ./web
-    - vendor/bin/phpcs --extensions=php --warning-severity=0 --standard=PSR2 -p ./themes
+    - vendor/bin/phpcs
 
 example_build:
   stage: build
