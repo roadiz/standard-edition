@@ -21,7 +21,6 @@ example_test:
       - vendor/
   script:
     - composer install --no-scripts
-    - composer run-script post-install-cmd
     - vendor/bin/phpcs
 
 example_build:
