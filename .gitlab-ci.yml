@@ -85,7 +85,7 @@ example_docker:
   only:
     - tags
   services:
-    - docker:17.09-dind
+    - docker:dind
   when: on_success
   dependencies:
     - example_build
