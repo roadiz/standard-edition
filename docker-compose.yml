@@ -1,32 +1,37 @@
-version: '2'
+version: '3'
 services:
     db:
-        image: mysql:5.6
+        image: mysql:5.7
         volumes:
-            - "./.data/db:/var/lib/mysql:cached"
+            - "./.data/db:/var/lib/mysql:delegated"
         environment:
             MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
             MYSQL_DATABASE: ${MYSQL_DATABASE}
             MYSQL_USER: ${MYSQL_USER}
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     app:
-        build: ./docker/php73-nginx-alpine
+        build:
+            context: ./docker/php73-nginx-alpine
+            args:
+                USER_UID: ${USER_UID}
         ports:
-            - 80:80
+            - 8088:80
         depends_on:
             - db
             - solr
         volumes:
-            - ${ROADIZ_APP_PATH}:/var/www/html
+            - ./:/var/www/html:cached
         environment:
             USE_APP_CACHE: ${USE_APP_CACHE}
+            USER_UID: ${USER_UID}
     solr:
          image: solr
          ports:
-             - "8983:8983"
+             - "8983/tcp"
          volumes:
-             - "./.data/solr:/opt/solr/server/solr/mycores:cached"
+             - "./.data/solr:/opt/solr/server/solr/mycores:delegated"
          entrypoint:
              - docker-entrypoint.sh
              - solr-precreate
              - roadiz
+
