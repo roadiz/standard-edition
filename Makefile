@@ -83,7 +83,7 @@ push-prod:
 		--exclude '/\..+/$$' \
 		-x 'app/conf/config\.yml' \
 		-x '\.env' \
-		-x '(\.dockerignore|\.editorconfig|\.env\.dist|\.gitignore|\.gitlab\-ci\.yml|composer\.json|composer\.lock|docker\-compose\.yml|docker\-compose\-dev\.yml|docker\-sync\.yml|Dockerfile|Makefile|README\.md|LICENSE\.md|Vagrantfile)' \
+		-x '(\.dockerignore|\.editorconfig|\.env\.dist|\.gitignore|\.gitlab\-ci\.yml|composer\.lock|docker\-compose\.yml|docker\-compose\-dev\.yml|docker\-sync\.yml|Dockerfile|Makefile|README\.md|LICENSE\.md|Vagrantfile)' \
 		-x '(bin|docker|samples|tmp|\.git|\.idea|files)/' \
 		-x 'app/(cache|logs|sessions|tmp)/' \
 		-x 'web/files/' \
