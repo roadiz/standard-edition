@@ -100,3 +100,6 @@ push-prod:
 configtest:
 	@command -v npm >/dev/null 2>&1 || { echo "❌\t${RED}I require npm but it's not installed. \tAborting.${NC}" >&2; exit 1; }
 	@echo "✅\t${GREEN}NodeJS is available. \tOK.${NC}" >&2;
+
+ngrok:
+	ngrok http ${DEV_DOMAIN}
