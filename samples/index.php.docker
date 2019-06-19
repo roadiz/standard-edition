@@ -30,9 +30,9 @@
 
 use RZ\Roadiz\Core\HttpFoundation\Request;
 
-if (PHP_VERSION_ID < 70100) {
+if (PHP_VERSION_ID < 70200) {
     echo 'Your PHP version is ' . phpversion() . "." . PHP_EOL;
-    echo 'You need a least PHP version 7.1.0';
+    echo 'You need a least PHP version 7.2.0';
     exit(1);
 }
 /** @deprecated Use Kernel::getProjectDir()  */
@@ -48,7 +48,7 @@ $request = Request::createFromGlobals();
  */
 if (getenv('USE_APP_CACHE') === true) {
     $kernel = new AppCache($kernel);
-    // When using the HttpCache, you need to call the method in your front controller 
+    // When using the HttpCache, you need to call the method in your front controller
     // instead of relying on the configuration parameter
     Request::enableHttpMethodParameterOverride();
 }
