@@ -36,7 +36,7 @@ themes/${THEME}/node_modules :
 .PHONY : clean uninstall update build watch cache
 
 cache :
-	bin/roadiz cache:clear
+	bin/roadiz cache:clear -e dev
 	bin/roadiz cache:clear -e prod
 	bin/roadiz cache:clear -e prod --preview
 	bin/roadiz cache:clear-fpm -e prod -d ${DEV_DOMAIN}
