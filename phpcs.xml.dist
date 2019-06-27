@@ -12,7 +12,6 @@
         <exclude name="Generic.Files.LineLength"/>
     </rule>
     <file>themes/</file>
-    <file>app/</file>
     <exclude-pattern>*/node_modules</exclude-pattern>
     <exclude-pattern>*/gen-src</exclude-pattern>
     <exclude-pattern>*/cache</exclude-pattern>
