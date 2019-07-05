@@ -27,6 +27,8 @@ security:
     session_name: roadiz_token
     session_cookie_secure: false
     session_cookie_httponly: true
+    # Change default password algorithm from sha512 to argon2i
+    algorithm: argon2i
 # For Vagrant MailCatcher
 #mailer:
 #    type: smtp
