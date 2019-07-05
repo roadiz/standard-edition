@@ -51,19 +51,25 @@
             "php bin/roadiz themes:assets:install Install",
             "php bin/roadiz themes:assets:install Rozier"
         ],
+        "rotate-secret": [
+            "RZ\\Roadiz\\Utils\\Composer\\InstallFiles\\ScriptHandler::rotateSecret"
+        ],
         "pre-docker": [
             "php bin/roadiz themes:assets:install Rozier"
         ],
         "post-install-cmd": [
             "RZ\\Roadiz\\Utils\\Composer\\InstallFiles\\ScriptHandler::install",
+            "@rotate-secret",
             "@cache-scripts"
         ],
         "post-update-cmd": [
             "RZ\\Roadiz\\Utils\\Composer\\InstallFiles\\ScriptHandler::install",
+            "@rotate-secret",
             "@cache-scripts"
         ],
         "post-create-project-cmd": [
             "RZ\\Roadiz\\Utils\\Composer\\InstallFiles\\ScriptHandler::install",
+            "@rotate-secret",
             "@cache-scripts"
         ]
     },
@@ -76,6 +82,7 @@
             "samples/index.php.sample": "./web/index.php",
             "samples/preview.php.sample": "./web/preview.php",
             "samples/Vagrantfile.sample": "./Vagrantfile"
-        }
+        },
+        "config-path": "./app/conf/config.yml"
     }
 }
