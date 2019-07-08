@@ -3,22 +3,18 @@
     "description": "Roadiz standard edition",
     "type": "project",
     "require": {
-        "php": ">=7.1",
-        "roadiz/roadiz": "~1.1.0"
+        "php": ">=7.2",
+        "roadiz/roadiz": "~1.2.0"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.3"
-    },
-    "config": {
-        "platform": {
-            "php": "7.1"
-        }
     },
     "suggest": {
         "sentry/sentry": "Allows monolog to send your log messages to a Sentry instance.",
         "roadiz/abstract-blog-theme": "Enhance your theme with many useful blog features.",
         "roadiz/abstract-pdf-theme": "Enhance your theme with PDF generation features.",
-        "roadiz/abstract-api-theme": "Add minimal security to your theme custom public API."
+        "roadiz/abstract-api-theme": "Add minimal security to your theme custom public API.",
+        "roadiz/abstract-user-theme": "Add a starter for public users space for your Roadiz theme."
     },
     "license": "MIT",
     "authors": [
@@ -54,19 +50,25 @@
             "php bin/roadiz themes:assets:install Install",
             "php bin/roadiz themes:assets:install Rozier"
         ],
+        "rotate-secret": [
+            "RZ\\Roadiz\\Utils\\Composer\\InstallFiles\\ScriptHandler::rotateSecret"
+        ],
         "pre-docker": [
             "php bin/roadiz themes:assets:install Rozier"
         ],
         "post-install-cmd": [
             "RZ\\Roadiz\\Utils\\Composer\\InstallFiles\\ScriptHandler::install",
+            "@rotate-secret",
             "@cache-scripts"
         ],
         "post-update-cmd": [
             "RZ\\Roadiz\\Utils\\Composer\\InstallFiles\\ScriptHandler::install",
+            "@rotate-secret",
             "@cache-scripts"
         ],
         "post-create-project-cmd": [
             "RZ\\Roadiz\\Utils\\Composer\\InstallFiles\\ScriptHandler::install",
+            "@rotate-secret",
             "@cache-scripts"
         ]
     },
@@ -79,6 +81,7 @@
             "samples/index.php.sample": "./web/index.php",
             "samples/preview.php.sample": "./web/preview.php",
             "samples/Vagrantfile.sample": "./Vagrantfile"
-        }
+        },
+        "config-path": "./app/conf/config.yml"
     }
 }
