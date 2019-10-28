@@ -90,3 +90,7 @@ configtest:
 
 ngrok:
 	ngrok http ${DEV_DOMAIN}
+
+test:
+	vendor/bin/phpcbf -p
+	vendor/bin/phpstan analyse -c phpstan.neon -l 3 themes
