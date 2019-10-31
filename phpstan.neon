@@ -6,3 +6,5 @@ parameters:
         - '#Call to method ([a-zA-Z]+)\(\) on an unknown class GeneratedNodeSources\\NS([a-zA-Z]+)#'
         - '#Call to an undefined method ([^:]+)\:\:get(?:External|Internal)Link(?:Sources)?\(\)#'
     reportUnmatchedIgnoredErrors: false
+includes:
+    - vendor/phpstan/phpstan-doctrine/extension.neon
