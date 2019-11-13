@@ -26,8 +26,9 @@ This is the **production-ready edition** for Roadiz. It is meant to setup your *
 ```bash
 # Create a new Roadiz project on develop branch
 composer create-project roadiz/standard-edition;
-# Create a new theme for your project
+# Navigate into your project dir
 cd standard-edition;
+# Create a new theme for your project
 bin/roadiz themes:generate --symlink --relative FooBar;
 ```
 
