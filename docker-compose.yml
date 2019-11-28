@@ -11,7 +11,7 @@ services:
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     app:
         build:
-            context: ./docker/php73-nginx-alpine
+            context: ./docker/php74-nginx-alpine
             args:
                 USER_UID: ${USER_UID}
         ports:
@@ -20,7 +20,7 @@ services:
             - db
             - solr
         volumes:
-            - ./:/var/www/html:cached
+            - ./:/var/www/html:consistent
         environment:
             USE_APP_CACHE: ${USE_APP_CACHE}
             USER_UID: ${USER_UID}
