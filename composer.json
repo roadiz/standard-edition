@@ -8,8 +8,6 @@
         "roadiz/models": "dev-develop",
         "roadiz/documents": "dev-feature/sf4.4",
         "roadiz/markdown": "dev-master",
-        "erusev/parsedown": "^1.8.0-beta-7 || ^1.8.0",
-        "erusev/parsedown-extra": "^0.8.0-beta-1 || ^0.8.0",
         "ambroisemaupate/intervention-request": "dev-feature/sf4.4"
     },
     "require-dev": {
