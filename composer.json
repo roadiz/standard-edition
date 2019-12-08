@@ -4,9 +4,13 @@
     "type": "project",
     "require": {
         "php": ">=7.2",
-        "roadiz/roadiz": "dev-develop",
+        "roadiz/roadiz": "dev-feature/sf4.4",
         "roadiz/models": "dev-develop",
-        "roadiz/documents": "dev-develop"
+        "roadiz/documents": "dev-feature/sf4.4",
+        "roadiz/markdown": "dev-master",
+        "erusev/parsedown": "^1.8.0-beta-7 || ^1.8.0",
+        "erusev/parsedown-extra": "^0.8.0-beta-1 || ^0.8.0",
+        "ambroisemaupate/intervention-request": "dev-feature/sf4.4"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.3",
