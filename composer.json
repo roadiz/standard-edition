@@ -4,11 +4,11 @@
     "type": "project",
     "require": {
         "php": ">=7.2",
-        "roadiz/roadiz": "dev-feature/sf4.4",
+        "roadiz/roadiz": "dev-develop",
         "roadiz/models": "dev-develop",
-        "roadiz/documents": "dev-feature/sf4.4",
+        "roadiz/documents": "dev-develop",
         "roadiz/markdown": "dev-master",
-        "ambroisemaupate/intervention-request": "dev-feature/sf4.4"
+        "ambroisemaupate/intervention-request": "dev-develop"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.3",
