@@ -29,7 +29,6 @@ declare(strict_types=1);
  * @file index.php
  * @author Ambroise Maupate
  */
-
 use RZ\Roadiz\Core\HttpFoundation\Request;
 use Symfony\Component\ErrorHandler\Debug;
 
