@@ -82,7 +82,8 @@ $kernel->getContainer()->offsetSet('request', $request);
 $kernel->get('requestStack')->push($request);
 /** @var EventDispatcher $dispatcher */
 $dispatcher = $kernel->get('dispatcher');
-$dispatcher->dispatch(new CachePurgeRequestEvent($kernel));
+$event = new CachePurgeRequestEvent($kernel);
+$dispatcher->dispatch($event);
 $dispatcher->dispatch(new CachePurgeAssetsRequestEvent($kernel));
 
 $text = [
