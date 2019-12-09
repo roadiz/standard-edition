@@ -29,6 +29,7 @@
  */
 
 use RZ\Roadiz\Core\HttpFoundation\Request;
+use Symfony\Component\Debug\Debug;
 
 if (PHP_VERSION_ID < 70200) {
     echo 'Your PHP version is ' . phpversion() . "." . PHP_EOL;
@@ -57,6 +58,7 @@ define('ROADIZ_ROOT', dirname(__DIR__));
 // Include Composer Autoload (relative to project root).
 require(dirname(__DIR__) . "/vendor/autoload.php");
 
+Debug::enable();
 // Use DevAppKernel on Vagrant box to use a cache dir not
 // in the shared folder.
 //$kernel = new DevAppKernel('dev', true, false, 'my_site');
