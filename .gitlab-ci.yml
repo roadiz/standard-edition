@@ -13,6 +13,7 @@ variables:
 example_test:
     stage: test
     image: roadiz/php74-runner
+    interruptible: true
     only:
         - develop
         - tags
@@ -28,6 +29,7 @@ example_test:
 example_build:
     stage: build
     image: roadiz/php74-runner
+    interruptible: true
     only:
         - develop
         - tags
