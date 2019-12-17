@@ -46,3 +46,8 @@ services:
             - docker-entrypoint.sh
             - solr-precreate
             - roadiz
+
+    mailer:
+        image: mailhog/mailhog
+        ports:
+            - ${MAILER_PORT}:8025/tcp
