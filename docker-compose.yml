@@ -36,6 +36,7 @@ services:
         environment:
             USE_APP_CACHE: ${USE_APP_CACHE}
             USER_UID: ${USER_UID}
+            DEFAULT_GATEWAY: ${DEFAULT_GATEWAY}
     solr:
         image: solr
         ports:
@@ -46,3 +47,15 @@ services:
             - docker-entrypoint.sh
             - solr-precreate
             - roadiz
+
+    mailer:
+        image: mailhog/mailhog
+        ports:
+            - ${MAILER_PORT}:8025/tcp
+
+networks:
+    default:
+        ipam:
+            driver: default
+            config:
+                -   subnet: ${DEFAULT_GATEWAY}/16

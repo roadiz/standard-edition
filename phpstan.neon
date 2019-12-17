@@ -12,6 +12,7 @@ parameters:
         - '#NodesSources\|null but returns GeneratedNodeSources\\NS(?:[a-zA-Z]+)#'
         - '#GeneratedNodeSources\\NS(?:[a-zA-Z]+)#'
         - '#Call to an undefined method RZ\\Roadiz\\Core\\AbstractEntities\\LeafInterface#'
+        - '#Doctrine\\Persistence\\ObjectRepository#'
     reportUnmatchedIgnoredErrors: false
 includes:
     - vendor/phpstan/phpstan-doctrine/extension.neon
