@@ -94,8 +94,8 @@ example_docker:
         DOCKER_DRIVER: overlay2
         DOCKER_TLS_CERTDIR: "/certs"
     when: on_success
-    dependencies:
-        - example_build
+    needs: ["example_build"]
+    dependencies: ["example_build"]
     before_script:
         # Need curl for pushing release to Sentry
         - apk add curl
