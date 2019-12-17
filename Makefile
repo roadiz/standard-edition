@@ -93,4 +93,4 @@ ngrok:
 
 test:
 	vendor/bin/phpcbf -p
-	vendor/bin/phpstan analyse -c phpstan.neon -l 3 themes
+	vendor/bin/phpstan analyse -c phpstan.neon -l 2 themes
