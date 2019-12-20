@@ -37,6 +37,7 @@ services:
             USE_APP_CACHE: ${USE_APP_CACHE}
             USER_UID: ${USER_UID}
             DEFAULT_GATEWAY: ${DEFAULT_GATEWAY}
+
     solr:
         image: solr
         ports:

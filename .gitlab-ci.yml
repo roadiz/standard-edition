@@ -36,7 +36,6 @@ example_build:
     cache:
         key: ${CI_COMMIT_REF_SLUG}
         paths:
-            - themes/BaseTheme/node_modules/
             - vendor/
     artifacts:
         expire_in: 1 hour
@@ -61,12 +60,7 @@ example_build:
     script:
         # Replace with your own theme path
         - cd themes/BaseTheme
-        # If you’re using Sass, install it locally
-        # https://github.com/sass/node-sass/issues/1980
-        # - yarn add node-sass
-        - yarn install
-        # Using Yarn with yarn.lock
-        #- yarn install --pure-lockfile
+        - yarn install --pure-lockfile
         - yarn run build
         - cd ../../
         # DO NOT USE --classmap-authoritative as we are going to generate nsentities on the go…
@@ -74,6 +68,9 @@ example_build:
         - composer run-script post-install-cmd
         # Create hard copies of theme assets
         - composer run-script pre-docker
+        # Remove HUGE node_module to speed up artifact uploads and downloads
+        - rm -rf themes/BaseTheme/node_modules
+        # No need to include dev entry points
         - rm -rf web/dev.php
         - rm -rf web/install.php
 
