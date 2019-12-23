@@ -32,7 +32,7 @@ services:
             - db
             - solr
         volumes:
-            - ./:/var/www/html:consistent
+            - ${ROADIZ_APP_PATH}:/var/www/html:consistent
         environment:
             USE_APP_CACHE: ${USE_APP_CACHE}
             USER_UID: ${USER_UID}
