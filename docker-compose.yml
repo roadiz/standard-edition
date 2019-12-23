@@ -1,7 +1,9 @@
 version: '3'
 services:
     db:
+        # You can use Postgres if you prefer
         image: mysql:5.7
+        #image: postgres:12.1
         volumes:
             - "./.data/db:/var/lib/mysql:delegated"
         environment:
@@ -9,6 +11,9 @@ services:
             MYSQL_DATABASE: ${MYSQL_DATABASE}
             MYSQL_USER: ${MYSQL_USER}
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            #POSTGRES_DB: ${MYSQL_DATABASE}
+            #POSTGRES_USER: ${MYSQL_USER}
+            #POSTGRES_PASSWORD: ${MYSQL_PASSWORD}
     pma:
         image: phpmyadmin/phpmyadmin
         ports:
