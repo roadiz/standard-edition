@@ -9,7 +9,7 @@ services:
             MYSQL_DATABASE: ${MYSQL_DATABASE}
             MYSQL_USER: ${MYSQL_USER}
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-            
+
     ## You can use Postgres if you prefer
     #db:
     #    image: postgres:12.1
