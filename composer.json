@@ -7,8 +7,7 @@
         "roadiz/roadiz": "dev-develop",
         "roadiz/models": "dev-develop",
         "roadiz/documents": "dev-develop",
-        "roadiz/markdown": "dev-master",
-        "ambroisemaupate/intervention-request": "dev-develop"
+        "roadiz/markdown": "dev-master"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.3",
