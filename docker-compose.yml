@@ -50,7 +50,7 @@ services:
             DEFAULT_GATEWAY: ${DEFAULT_GATEWAY}
 
     solr:
-        image: solr
+        image: solr:7
         ports:
             - "${SOLR_PORT}:8983/tcp"
         volumes:
