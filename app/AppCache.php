@@ -1,5 +1,7 @@
 <?php
 
-class AppCache extends \RZ\Roadiz\Utils\HttpCache
+use RZ\Roadiz\Utils\HttpCache;
+
+class AppCache extends HttpCache
 {
 }
