@@ -2,6 +2,7 @@
 # Roadiz
 #
 /*.sql
+/*.zip
 /app/*.sql
 /app/*.zip
 /app/sessions/*

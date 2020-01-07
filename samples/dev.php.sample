@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  * Copyright © 2018, Ambroise Maupate and Julien Blanchet
  *
@@ -27,9 +29,8 @@
  * @file index.php
  * @author Ambroise Maupate
  */
-
 use RZ\Roadiz\Core\HttpFoundation\Request;
-use Symfony\Component\Debug\Debug;
+use Symfony\Component\ErrorHandler\Debug;
 
 if (PHP_VERSION_ID < 70200) {
     echo 'Your PHP version is ' . phpversion() . "." . PHP_EOL;
@@ -43,6 +44,10 @@ $allowedIp = [
     //'172.21.0.1', // docker host (FOR DEV ONLY)
     '127.0.0.1', 'fe80::1', '::1', ':ffff:127.0.0.1', '::ffff:127.0.0.1' // localhost
 ];
+if (getenv('DEFAULT_GATEWAY')) {
+    $allowedIp[] = getenv('DEFAULT_GATEWAY');
+    $allowedIp[] = '::ffff:' . getenv('DEFAULT_GATEWAY');
+}
 
 // This check prevents access to debug front controllers that are deployed by accident to production servers.
 // Feel free to remove this, extend it, or make something more sophisticated.
@@ -59,6 +64,7 @@ define('ROADIZ_ROOT', dirname(__DIR__));
 require(dirname(__DIR__) . "/vendor/autoload.php");
 
 Debug::enable();
+
 // Use DevAppKernel on Vagrant box to use a cache dir not
 // in the shared folder.
 //$kernel = new DevAppKernel('dev', true, false, 'my_site');

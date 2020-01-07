@@ -10,6 +10,22 @@ for your desktop website and another one for your mobile, using the same node hi
 Roadiz is released under MIT license, so you can reuse
 and distribute its code for personal and commercial projects.
 
+* [Documentation](#documentation)
+* [Standard edition](#standard-edition)
+* [Usage](#usage)
+  + [Update Roadiz and your own theme assets](#update-roadiz-and-your-own-theme-assets)
+  + [Develop with *PHP* internal server](#develop-with-php-internal-server)
+  + [Develop with *Vagrant*](#develop-with-vagrant)
+  + [Develop with *Docker*](#develop-with-docker)
+    - [Install your theme assets and execute Roadiz commands](#install-your-theme-assets-and-execute-roadiz-commands)
+    - [On Linux](#on-linux)
+    - [On Mac or Windows](#on-mac-or-windows)
+* [Update Roadiz sources](#update-roadiz-sources)
+* [Maximize performances for production](#maximize-performances-for-production)
+  + [Optimize class autoloader](#optimize-class-autoloader)
+  + [Increase PHP cache sizes](#increase-php-cache-sizes)
+* [Build a docker image with Gitlab Registry](#build-a-docker-image-with-gitlab-registry)
+
 ## Documentation
 
 * *Roadiz* website: http://www.roadiz.io
@@ -26,8 +42,9 @@ This is the **production-ready edition** for Roadiz. It is meant to setup your *
 ```bash
 # Create a new Roadiz project on develop branch
 composer create-project roadiz/standard-edition;
-# Create a new theme for your project
+# Navigate into your project dir
 cd standard-edition;
+# Create a new theme for your project
 bin/roadiz themes:generate --symlink --relative FooBar;
 ```
 
@@ -93,6 +110,8 @@ folder as *server root*.
 *Docker* on Linux will provide awesome performances and a production-like environment 
 without bloating your development machine:
 
+- Copy `.env.dist` file to `.env`
+
 ```bash
 # Copy sample environment variables
 # and adjust them against your needs.
@@ -128,15 +147,26 @@ docker-compose exec -u www-data app bin/roadiz themes:assets:install --symlink -
 
 #### On Linux
 
-Pay attention that *PHP* is running with *www-data* user. Linux docker host must
-update the `docker/php73-nginx-alpine/Dockerfile` file to reflect your local user **UID**.
+Pay attention that *PHP* is running with *www-data* user. You must update your `.env` file to 
+reflect your local user **UID** during image build.
 
-Update line: `&& usermod -u 1000 www-data \` using your on UID, you can find it with `id` command.
+```shell script
+# Type id command in your favorite terminal app
+id
+# It should output something like
+# uid=1000(toto)
+```
+
+So use the same uid in your `.env` file **before** starting and building your docker image.
+```dotenv
+USER_UID=1000
+```
 
 #### On Mac or Windows
 
 Unfortunately, on *macOS* and *Windows* performances will be worse than *Vagrant* due to
-the *volumes* sharing system. You can use [docker-sync](http://docker-sync.io/) to improve IO performances with your shared volumes.    
+the *volumes* sharing system. You can use [docker-sync](http://docker-sync.io/) to improve IO performances 
+with your shared volumes.    
 Use following command **instead of** `docker-compose up -d`:
 
 ```bash
@@ -171,11 +201,16 @@ realpath_cache_ttl=600
 
 ## Build a docker image with Gitlab Registry
 
-You can create a standalone *Docker* image with your Roadiz project thanks to our `roadiz/php73-nginx-alpine` base image, a continuous integration tool such as *Gitlab CI* and a private *Docker* registry. All your theme assets will be compiled in a controlled environment and your production website will have a minimal downtime at each update.
+You can create a standalone *Docker* image with your Roadiz project thanks to our `roadiz/php74-nginx-alpine` base 
+image, a continuous integration tool such as *Gitlab CI* and a private *Docker* registry. 
+All your theme assets will be compiled in a controlled environment and your production website 
+will have a minimal downtime at each update.
 
-Make sure you don’t ignore `package.lock` or `yarn.lock` in your themes not to get dependency errors when your CI system will compile your theme assets. You may do the same for your project `composer.lock` to make sure that you’ll use the same dependencies version in dev as well as in your CI jobs.
+Make sure you don’t ignore `package.lock` or `yarn.lock` in your themes not to get dependency errors when your 
+CI system will compile your theme assets. You may do the same for your project `composer.lock` to make sure 
+that you’ll use the same dependencies version in dev as well as in your CI jobs.
 
-Standard-edition provides a basic configuration set with a `Dockerfile`:
+*Standard Edition* provides a basic configuration set with a `Dockerfile`:
 
 1. Customize `.gitlab-ci.yml` file to reflect your *Gitlab* instance configuration and your *theme* path and your project name.
 2. Add your theme in *Composer* `pre-docker` scripts to be able to install your theme assets into `web/` during Docker build:

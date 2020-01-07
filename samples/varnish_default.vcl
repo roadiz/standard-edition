@@ -20,6 +20,7 @@ backend default {
 
 acl local {
     "localhost";
+    "app";
 }
 
 sub vcl_recv {
@@ -28,6 +29,11 @@ sub vcl_recv {
     } else {
         set req.http.X-Forwarded-Port = "80";
     }
+    
+    # Remove has_js and Cloudflare/Google Analytics __* cookies.
+    set req.http.Cookie = regsuball(req.http.Cookie, "(^|;\s*)(_[_a-z]+|has_js)=[^;]*", "");
+    # Remove a ";" prefix, if present.
+    set req.http.Cookie = regsub(req.http.Cookie, "^;\s*", "");
 
     # Happens before we check if we have this in cache already.
     #
@@ -85,11 +91,5 @@ sub vcl_deliver {
     # response to the client.
     #
     # You can do accounting or modifying the final object here.
-
-    if (obj.hits > 0) {
-        set resp.http.X-Cache = "HIT";
-    } else {
-        set resp.http.X-Cache = "MISS";
-    }
 }
 

@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  * Copyright © 2018, Ambroise Maupate and Julien Blanchet
  *
@@ -27,9 +29,8 @@
  * @file index.php
  * @author Ambroise Maupate
  */
-
 use RZ\Roadiz\Core\HttpFoundation\Request;
-use Symfony\Component\Debug\Debug;
+use Symfony\Component\ErrorHandler\Debug;
 
 if (PHP_VERSION_ID < 70200) {
     echo 'Your PHP version is ' . phpversion() . "." . PHP_EOL;
@@ -57,6 +58,7 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
 define('ROADIZ_ROOT', dirname(__DIR__));
 // Include Composer Autoload (relative to project root).
 require(ROADIZ_ROOT . "/vendor/autoload.php");
+
 Debug::enable();
 
 $kernel = new AppKernel('install', true);

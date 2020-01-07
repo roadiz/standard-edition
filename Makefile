@@ -34,6 +34,8 @@ cache :
 	bin/roadiz cache:clear -e prod --preview
 	bin/roadiz cache:clear-fpm -e prod -d ${DEV_DOMAIN}
 	bin/roadiz cache:clear-fpm -e prod --preview -d ${DEV_DOMAIN}
+	bin/roadiz cache:clear-fpm -e prod
+	bin/roadiz cache:clear-fpm -e prod --preview
 
 # Launch Gulp watch task
 watch : configtest
@@ -88,3 +90,7 @@ configtest:
 
 ngrok:
 	ngrok http ${DEV_DOMAIN}
+
+test:
+	vendor/bin/phpcbf -p
+	vendor/bin/phpstan analyse -c phpstan.neon -l 2 themes

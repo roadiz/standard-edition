@@ -1,7 +1,6 @@
 version: '2'
 options:
     compose-file-path: 'docker-compose.yml'
-    compose-dev-file-path: 'docker-compose-dev.yml'
 syncs:
     ${SYNC_NAME}-db-sync:
         # which folder to watch / sync from - you can use tilde (~), it will get expanded. Be aware that the trailing slash makes a difference
