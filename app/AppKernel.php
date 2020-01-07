@@ -1,11 +1,14 @@
 <?php
+
+use RZ\Roadiz\Core\Kernel;
+
 /**
  * Class AppKernel.
  *
  * Customize Roadiz kernel with your own project settings.
  */
 
-class AppKernel extends \RZ\Roadiz\Core\Kernel
+class AppKernel extends Kernel
 {
     /**
      * {@inheritdoc}
