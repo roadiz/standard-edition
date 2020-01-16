@@ -2,6 +2,8 @@
 # Base theme
 # Development tasks
 #
+include .env
+
 GREEN=\033[0;32m
 RED=\033[0;31m
 # No Color
@@ -9,7 +11,7 @@ NC=\033[0m
 THEME_PREFIX=Base
 THEME=${THEME_PREFIX}Theme
 # Use a local available port
-DEV_DOMAIN="0.0.0.0:8081"
+DEV_DOMAIN="0.0.0.0:${APP_PORT}"
 
 # if you want to deploy old-school style
 REMOTE_FTP_PATH="/path/to/server/root"
