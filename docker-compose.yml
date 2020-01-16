@@ -64,6 +64,17 @@ services:
         ports:
             - ${MAILER_PORT}:8025/tcp
 
+    varnish:
+        build:
+            context: ./docker/varnish
+        tmpfs: /usr/local/var/varnish:exec
+        depends_on:
+            - app
+        links:
+            - app:app
+        ports:
+            - ${VARNISH_PORT}:80/tcp
+
 networks:
     default:
         ipam:
