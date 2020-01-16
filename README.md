@@ -64,6 +64,8 @@ bin/roadiz themes:assets:install --symlink --relative FooBar;
 
 ### Develop with *PHP* internal server
 
+- Copy `.env.dist` file to `.env`
+
 ````bash
 # Edit your Makefile "DEV_DOMAIN" variable to use a dedicated port
 # to your project and your theme name.
