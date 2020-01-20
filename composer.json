@@ -13,7 +13,7 @@
     },
     "suggest": {
         "sentry/sentry": "Allows monolog to send your log messages to a Sentry instance.",
-        "php-http/curl-client": "Required for sentry/sentry",
+        "php-http/guzzle6-adapter": "Required for sentry/sentry",
         "guzzlehttp/psr7": "Required for sentry/sentry",
         "roadiz/abstract-blog-theme": "Enhance your theme with many useful blog features.",
         "roadiz/abstract-pdf-theme": "Enhance your theme with PDF generation features.",
