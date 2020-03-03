@@ -43,7 +43,7 @@ services:
             - db
             - solr
         volumes:
-            - ${ROADIZ_APP_PATH}:/var/www/html:consistent
+            - ${ROADIZ_APP_PATH}:/var/www/html:cached
         environment:
             USE_APP_CACHE: ${USE_APP_CACHE}
             USER_UID: ${USER_UID}
@@ -54,7 +54,7 @@ services:
         ports:
             - "${SOLR_PORT}:8983/tcp"
         volumes:
-            - "./.data/solr:/var/solr:consistent"
+            - "./.data/solr:/var/solr:delegated"
         command:
             - solr-precreate
             - roadiz
