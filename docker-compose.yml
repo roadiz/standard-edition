@@ -44,10 +44,23 @@ services:
             - solr
         volumes:
             - ${ROADIZ_APP_PATH}:/var/www/html:cached
+        networks:
+            - frontproxynet
+            - default
         environment:
             USE_APP_CACHE: ${USE_APP_CACHE}
             USER_UID: ${USER_UID}
             DEFAULT_GATEWAY: ${DEFAULT_GATEWAY}
+        labels:
+            # Replace example by your service name
+            - "traefik.enable=true"
+            - "traefik.http.services.example.loadbalancer.server.scheme=http"
+            - "traefik.http.services.example.loadbalancer.server.port=80"
+            - "traefik.http.services.example.loadbalancer.passhostheader=true"
+            # Listen HTTP
+            - "traefik.http.routers.example.entrypoints=http"
+            - "traefik.http.routers.example.rule=Host(${HOSTNAME})"
+            - "traefik.http.routers.example.service=example"
 
     solr:
         image: solr:8
@@ -74,8 +87,23 @@ services:
             - app:app
         ports:
             - ${VARNISH_PORT}:80/tcp
+        networks:
+            - frontproxynet
+            - default
+        labels:
+            # Replace example by your service name
+            - "traefik.enable=true"
+            - "traefik.http.services.example_varnish.loadbalancer.server.scheme=http"
+            - "traefik.http.services.example_varnish.loadbalancer.server.port=80"
+            - "traefik.http.services.example_varnish.loadbalancer.passhostheader=true"
+            # Listen HTTP
+            - "traefik.http.routers.example_varnish.entrypoints=http"
+            - "traefik.http.routers.example_varnish.rule=Host(${HOSTNAME_VARNISH})"
+            - "traefik.http.routers.example_varnish.service=example_varnish"
 
 networks:
+    frontproxynet:
+        external: true
     default:
         ipam:
             driver: default
