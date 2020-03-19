@@ -35,5 +35,6 @@ pimple.json
 !app/gen-src/Proxies/.gitignore
 !themes/BaseTheme/static
 !themes/BaseTheme/Resources/views/partials/*
+!themes/BaseTheme/Resources/views/base.html.twig
 !web/themes/*
 

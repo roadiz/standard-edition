@@ -46,6 +46,11 @@ composer create-project roadiz/standard-edition;
 cd standard-edition;
 # Create a new theme for your project
 bin/roadiz themes:generate --symlink --relative FooBar;
+# Go to your theme
+cd themes/FooBarTheme;
+# Build base theme assets
+yarn; # or npm install
+yarn build; # or npm run build
 ```
 
 Composer will automatically create a new project based on Roadiz and download every dependencies. 
@@ -60,6 +65,33 @@ composer update -o --no-dev
 # Re-install your theme in public folder using relative symlinks (MacOS + Unix)
 # remove --relative flag on Windows to generate absolute symlinks
 bin/roadiz themes:assets:install --symlink --relative FooBar;
+```
+
+### Develop with *Docker*
+
+*Docker* on Linux will provide awesome performances and a production-like environment 
+without bloating your development machine:
+
+- Copy `.env.dist` file to `.env`
+
+```bash
+# Copy sample environment variables
+# and adjust them against your needs.
+cp .env.dist .env;
+# Build PHP image
+docker-compose build;
+# Create and start containers
+docker-compose up -d;
+
+# Adapt Makefile with your theme name and NPM/Yarn
+# This will be useful to generate assets and clear cache
+# in one command
+nano Makefile; 
+cd themes/FooBarTheme;
+# Install NPM dependencies for your front-end dev environment.
+yarn; # npm install;
+# Then build assets
+yarn build; # npm run build
 ```
 
 ### Develop with *PHP* internal server
@@ -106,34 +138,6 @@ vagrant up;
 If you have a full PHP-MySQL server running directly on your development machine you can
 ignore *Vagrant* and use it. Make sure that your virtual host is configured to use `web/`
 folder as *server root*.
-
-### Develop with *Docker*
-
-*Docker* on Linux will provide awesome performances and a production-like environment 
-without bloating your development machine:
-
-- Copy `.env.dist` file to `.env`
-
-```bash
-# Copy sample environment variables
-# and adjust them against your needs.
-cp .env.dist .env;
-# Build PHP image
-docker-compose build;
-# Create and start containers
-docker-compose up -d;
-
-# Adapt Makefile with your theme name and NPM/Yarn
-# This will be useful to generate assets and clear cache
-# in one command
-nano Makefile; 
-cd themes/FooBarTheme;
-# Install NPM dependencies for your front-end dev environment.
-# Use YARN
-yarn;
-# OR use vanilla NPM
-npm install;
-```
 
 #### Install your theme assets and execute Roadiz commands
 
@@ -225,6 +229,7 @@ php bin/roadiz themes:assets:install MyTheme
    
 ```
 !themes/BaseTheme/static
+!themes/BaseTheme/Resources/views/base.html.twig
 !themes/BaseTheme/Resources/views/partials/*
 ```
 
