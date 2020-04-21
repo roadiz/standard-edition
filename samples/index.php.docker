@@ -57,7 +57,16 @@ if ((bool) getenv('USE_APP_CACHE')) {
 
 // Using Front Proxy (HA or Docker)
 // Trust incoming request IP as your reverse proxy
-Request::setTrustedProxies([$request->server->get('REMOTE_ADDR')], Request::HEADER_X_FORWARDED_ALL);
+Request::setTrustedProxies([
+    // If using Varnish behind Traefik or HAProxy,
+    // you need to add every proxy IP here to
+    // fetch final user IP
+    // 'xxx.xxx.xxx.xxx', // CDN ou cloudflare IPS if necessary
+    // '172.18.0.2',      // Traefik docker IP
+    // '172.18.0.3',      // Varnish behind traefik IP
+    // etc
+    $request->server->get('REMOTE_ADDR')
+], Request::HEADER_X_FORWARDED_ALL);
 
 $response = $kernel->handle($request);
 $response->send();
