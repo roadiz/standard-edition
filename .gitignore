@@ -14,7 +14,10 @@
 /web/clear_cache.php
 /web/assets
 /pimple.json
-/.data
+/.data/*
+!/.data/.gitkeep
+!/.data/solr/.gitkeep
+!/.data/db/.gitkeep
 /.env
 
 # Roadiz theme

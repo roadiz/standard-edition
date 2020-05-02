@@ -5,6 +5,7 @@
 */*/temp*
 docker
 .vagrant
+.data
 .idea
 app/sessions/*
 app/logs/*
