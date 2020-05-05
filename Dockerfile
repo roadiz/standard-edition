@@ -8,10 +8,13 @@ RUN apk add --no-cache shadow make \
     && usermod -u ${USER_UID} www-data \
     && groupmod -g ${USER_UID} www-data
 
+COPY docker/php74-nginx-alpine/crontab.txt /crontab.txt
 COPY --chown=www-data:www-data . /var/www/html/
 COPY --chown=www-data:www-data samples/index.php.docker /var/www/html/web/index.php
 COPY --chown=www-data:www-data samples/preview.php.docker /var/www/html/web/preview.php
 COPY --chown=www-data:www-data samples/clear_cache.php.sample /var/www/html/web/clear_cache.php
+
+RUN /usr/bin/crontab /crontab.txt
 
 VOLUME /var/www/html/files \
        /var/www/html/web/files \

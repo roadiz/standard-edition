@@ -27,8 +27,6 @@ services:
 
     app:
         build:
-            #context: ./docker/php72-nginx-alpine
-            #context: ./docker/php73-nginx-alpine
             context: ./docker/php74-nginx-alpine
             args:
                 USER_UID: ${USER_UID}
