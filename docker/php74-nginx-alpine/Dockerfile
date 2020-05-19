@@ -8,7 +8,7 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV ROADIZ_ENV=dev
 ENV USE_APP_CACHE=0
 
-RUN apk add --no-cache shadow make git \
+RUN apk add --no-cache git \
     && usermod -u ${USER_UID} www-data \
     && groupmod -g ${USER_UID} www-data
 

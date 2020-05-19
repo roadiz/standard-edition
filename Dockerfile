@@ -4,8 +4,7 @@ ENV USER_UID=1000
 ARG USER_UID=1000
 ENV ROADIZ_ENV=prod
 
-RUN apk add --no-cache shadow make \
-    && usermod -u ${USER_UID} www-data \
+RUN usermod -u ${USER_UID} www-data \
     && groupmod -g ${USER_UID} www-data
 
 COPY docker/php74-nginx-alpine/crontab.txt /crontab.txt
