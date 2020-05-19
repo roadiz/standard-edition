@@ -29,7 +29,7 @@ WORKDIR /var/www/html
 
 RUN ln -s /usr/share/nginx/html/bin/roadiz /usr/local/bin/roadiz \
     && usermod -u ${USER_UID} www-data \
-    && /usr/bin/crontab /crontab.txt \
+    && /usr/bin/crontab -u www-data /crontab.txt \
     && chown -R www-data:www-data /var/www/html/
 
 ENTRYPOINT exec /usr/bin/supervisord -n -c /etc/supervisord.conf

@@ -14,7 +14,7 @@ COPY --chown=www-data:www-data samples/index.php.docker /var/www/html/web/index.
 COPY --chown=www-data:www-data samples/preview.php.docker /var/www/html/web/preview.php
 COPY --chown=www-data:www-data samples/clear_cache.php.sample /var/www/html/web/clear_cache.php
 
-RUN /usr/bin/crontab /crontab.txt
+RUN /usr/bin/crontab -u www-data /crontab.txt
 
 VOLUME /var/www/html/files \
        /var/www/html/web/files \
