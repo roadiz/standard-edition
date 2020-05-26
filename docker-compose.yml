@@ -1,6 +1,11 @@
 version: '3'
 services:
     db:
+        build:
+            # Custom image for file permissions
+            context: ./docker/mysql
+            args:
+                USER_UID: ${USER_UID}
         image: mysql:5.7
         volumes:
             - "./.data/db:/var/lib/mysql:delegated"
@@ -9,16 +14,6 @@ services:
             MYSQL_DATABASE: ${MYSQL_DATABASE}
             MYSQL_USER: ${MYSQL_USER}
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-
-    ## You can use Postgres if you prefer
-    #db:
-    #    image: postgres:12.1
-    #    volumes:
-    #        - "./.data/db:/var/lib/postgresql/data:delegated"
-    #    environment:
-    #        POSTGRES_DB: ${MYSQL_DATABASE}
-    #        POSTGRES_USER: ${MYSQL_USER}
-    #        POSTGRES_PASSWORD: ${MYSQL_PASSWORD}
 
     pma:
         image: phpmyadmin/phpmyadmin
@@ -32,8 +27,6 @@ services:
 
     app:
         build:
-            #context: ./docker/php72-nginx-alpine
-            #context: ./docker/php73-nginx-alpine
             context: ./docker/php74-nginx-alpine
             args:
                 USER_UID: ${USER_UID}
@@ -63,11 +56,19 @@ services:
             - "traefik.http.routers.example.service=example"
 
     solr:
-        image: solr:8
+        build:
+            # Custom image for file permissions
+            context: ./docker/solr
+            args:
+                USER_UID: ${USER_UID}
+        image: solr:8-slim
         ports:
             - "${SOLR_PORT}:8983/tcp"
         volumes:
             - "./.data/solr:/var/solr:delegated"
+        environment:
+            SOLR_UID: ${USER_UID}
+            SOLR_GID: ${USER_UID}
         command:
             - solr-precreate
             - roadiz

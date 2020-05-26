@@ -31,13 +31,13 @@ themes/${THEME}/node_modules :
 .PHONY : clean uninstall update build watch cache
 
 cache :
-	bin/roadiz cache:clear -e dev
-	bin/roadiz cache:clear -e prod
-	bin/roadiz cache:clear -e prod --preview
-	bin/roadiz cache:clear-fpm -e prod -d ${DEV_DOMAIN}
-	bin/roadiz cache:clear-fpm -e prod --preview -d ${DEV_DOMAIN}
-	bin/roadiz cache:clear-fpm -e prod
-	bin/roadiz cache:clear-fpm -e prod --preview
+	php bin/roadiz cache:clear -e dev
+	php bin/roadiz cache:clear -e prod
+	php bin/roadiz cache:clear -e prod --preview
+	php bin/roadiz cache:clear-fpm -e prod -d ${DEV_DOMAIN}
+	php bin/roadiz cache:clear-fpm -e prod --preview -d ${DEV_DOMAIN}
+	php bin/roadiz cache:clear-fpm -e prod
+	php bin/roadiz cache:clear-fpm -e prod --preview
 
 # Launch Gulp watch task
 watch : configtest
@@ -62,12 +62,12 @@ dev-server:
 
 # Migrate your configured theme, update DB and empty caches.
 migrate:
-	bin/roadiz themes:migrate /Themes/${THEME}/${THEME}App;
+	php bin/roadiz themes:migrate /Themes/${THEME}/${THEME}App;
 
 push-prod:
 	composer update -o --prefer-dist;
-	bin/roadiz generate:htaccess;
-	bin/roadiz themes:assets:install ${THEME_PREFIX};
+	php bin/roadiz generate:htaccess;
+	php bin/roadiz themes:assets:install ${THEME_PREFIX};
 	lftp -e "mirror --only-newer --parallel=3 -R \
 		--exclude '/\..+/$$' \
 		-x 'app/conf/config\.yml' \
@@ -81,7 +81,7 @@ push-prod:
 		-x 'themes/${THEME}/(app|node_modules|webpack)/' \
 		-x '\.(psd|rev|log|cmd|bat|pif|scr|exe|c?sh|reg|vb?|ws?|sql|db|db3)$$' \
 		./ ${REMOTE_FTP_PATH}" -u ${REMOTE_FTP_USER},${REMOTE_FTP_PASS} ${REMOTE_FTP_HOST}
-	bin/roadiz themes:assets:install --relative --symlink ${THEME_PREFIX};
+	php bin/roadiz themes:assets:install --relative --symlink ${THEME_PREFIX};
 
 #
 # Test if required binaries are available
@@ -94,5 +94,5 @@ ngrok:
 	ngrok http ${DEV_DOMAIN}
 
 test:
-	vendor/bin/phpcbf -p
-	vendor/bin/phpstan analyse -c phpstan.neon -l 2 themes
+	php vendor/bin/phpcbf -p
+	php vendor/bin/phpstan analyse -c phpstan.neon -l 2 themes

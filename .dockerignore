@@ -5,6 +5,7 @@
 */*/temp*
 docker
 .vagrant
+.data
 .idea
 app/sessions/*
 app/logs/*
@@ -33,6 +34,7 @@ pimple.json
 !vendor
 !app/gen-src/GeneratedNodeSources/.gitignore
 !app/gen-src/Proxies/.gitignore
+!docker/php74-nginx-alpine/crontab.txt
 !themes/BaseTheme/static
 !themes/BaseTheme/Resources/views/partials/*
 !themes/BaseTheme/Resources/views/base.html.twig

@@ -8,7 +8,7 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV ROADIZ_ENV=dev
 ENV USE_APP_CACHE=0
 
-RUN apk add --no-cache shadow make git \
+RUN apk add --no-cache git \
     && usermod -u ${USER_UID} www-data \
     && groupmod -g ${USER_UID} www-data
 
@@ -22,12 +22,14 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Display errors
 ADD php.ini /usr/local/etc/php/php.ini
 ADD zz-docker.conf /usr/local/etc/php-fpm.d/zz-docker.conf
+ADD crontab.txt /crontab.txt
 
 VOLUME /var/www/html
 WORKDIR /var/www/html
 
 RUN ln -s /usr/share/nginx/html/bin/roadiz /usr/local/bin/roadiz \
     && usermod -u ${USER_UID} www-data \
+    && /usr/bin/crontab -u www-data /crontab.txt \
     && chown -R www-data:www-data /var/www/html/
 
 ENTRYPOINT exec /usr/bin/supervisord -n -c /etc/supervisord.conf
