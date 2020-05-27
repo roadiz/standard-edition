@@ -44,6 +44,12 @@ services:
             USE_APP_CACHE: ${USE_APP_CACHE}
             USER_UID: ${USER_UID}
             DEFAULT_GATEWAY: ${DEFAULT_GATEWAY}
+            BLACKFIRE_LOG_LEVEL: ${BLACKFIRE_LOG_LEVEL}
+            BLACKFIRE_SERVER_ID: ${BLACKFIRE_SERVER_ID}
+            BLACKFIRE_SERVER_TOKEN: ${BLACKFIRE_SERVER_TOKEN}
+            BLACKFIRE_CLIENT_ID: ${BLACKFIRE_CLIENT_ID}
+            BLACKFIRE_CLIENT_TOKEN: ${BLACKFIRE_CLIENT_TOKEN}
+            BLACKFIRE_ENDPOINT: "https://blackfire.io"
         labels:
             # Replace example by your service name
             - "traefik.enable=true"
@@ -77,6 +83,16 @@ services:
         image: mailhog/mailhog
         ports:
             - ${MAILER_PORT}:8025/tcp
+
+    blackfire:
+        image: blackfire/blackfire
+        environment:
+            # Exposes BLACKFIRE_* environment variables from the host
+            BLACKFIRE_LOG_LEVEL: ${BLACKFIRE_LOG_LEVEL}
+            BLACKFIRE_SERVER_ID: ${BLACKFIRE_SERVER_ID}
+            BLACKFIRE_SERVER_TOKEN: ${BLACKFIRE_SERVER_TOKEN}
+            BLACKFIRE_CLIENT_ID: ${BLACKFIRE_CLIENT_ID}
+            BLACKFIRE_CLIENT_TOKEN: ${BLACKFIRE_CLIENT_TOKEN}
 
     varnish:
         build:
