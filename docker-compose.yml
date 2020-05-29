@@ -35,7 +35,7 @@ services:
             - "traefik.http.services.example_pma.loadbalancer.passhostheader=true"
             # Listen HTTP
             - "traefik.http.routers.example_pma.entrypoints=http"
-            - "traefik.http.routers.example_pma.rule=Host(${HOSTNAME_PMA)"
+            - "traefik.http.routers.example_pma.rule=Host(${HOSTNAME_PMA})"
             - "traefik.http.routers.example_pma.service=example_pma"
 
     app:
