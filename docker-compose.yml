@@ -24,6 +24,19 @@ services:
             MYSQL_DATABASE: ${MYSQL_DATABASE}
             MYSQL_USER: ${MYSQL_USER}
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+        networks:
+            - frontproxynet
+            - default
+        labels:
+            # Replace example_pma by your service name
+            - "traefik.enable=true"
+            - "traefik.http.services.example_pma.loadbalancer.server.scheme=http"
+            - "traefik.http.services.example_pma.loadbalancer.server.port=80"
+            - "traefik.http.services.example_pma.loadbalancer.passhostheader=true"
+            # Listen HTTP
+            - "traefik.http.routers.example_pma.entrypoints=http"
+            - "traefik.http.routers.example_pma.rule=Host(${HOSTNAME_PMA)"
+            - "traefik.http.routers.example_pma.service=example_pma"
 
     app:
         build:
@@ -78,11 +91,37 @@ services:
         command:
             - solr-precreate
             - roadiz
+        networks:
+            - frontproxynet
+            - default
+        labels:
+            # Replace example_solr by your service name
+            - "traefik.enable=true"
+            - "traefik.http.services.example_solr.loadbalancer.server.scheme=http"
+            - "traefik.http.services.example_solr.loadbalancer.server.port=8983"
+            - "traefik.http.services.example_solr.loadbalancer.passhostheader=true"
+            # Listen HTTP
+            - "traefik.http.routers.example_solr.entrypoints=http"
+            - "traefik.http.routers.example_solr.rule=Host(${HOSTNAME_SOLR})"
+            - "traefik.http.routers.example_solr.service=example_solr"
 
     mailer:
         image: mailhog/mailhog
         ports:
             - ${MAILER_PORT}:8025/tcp
+        networks:
+            - frontproxynet
+            - default
+        labels:
+            # Replace example_mailer by your service name
+            - "traefik.enable=true"
+            - "traefik.http.services.example_mailer.loadbalancer.server.scheme=http"
+            - "traefik.http.services.example_mailer.loadbalancer.server.port=8025"
+            - "traefik.http.services.example_mailer.loadbalancer.passhostheader=true"
+            # Listen HTTP
+            - "traefik.http.routers.example_mailer.entrypoints=http"
+            - "traefik.http.routers.example_mailer.rule=Host(${HOSTNAME_MAILER})"
+            - "traefik.http.routers.example_mailer.service=example_mailer"
 
     blackfire:
         image: blackfire/blackfire
