@@ -9,8 +9,8 @@ RUN usermod -u ${USER_UID} www-data \
 
 COPY docker/php74-nginx-alpine/crontab.txt /crontab.txt
 COPY --chown=www-data:www-data . /var/www/html/
-COPY --chown=www-data:www-data samples/index.php.docker /var/www/html/web/index.php
-COPY --chown=www-data:www-data samples/preview.php.docker /var/www/html/web/preview.php
+COPY --chown=www-data:www-data samples/index.php.sample /var/www/html/web/index.php
+COPY --chown=www-data:www-data samples/preview.php.sample /var/www/html/web/preview.php
 COPY --chown=www-data:www-data samples/clear_cache.php.sample /var/www/html/web/clear_cache.php
 
 RUN /usr/bin/crontab -u www-data /crontab.txt

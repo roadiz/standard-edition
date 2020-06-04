@@ -12,9 +12,6 @@ if (PHP_VERSION_ID < 70200) {
     echo 'You need a least PHP version 7.2.0';
     exit(1);
 }
-/** @deprecated Use Kernel::getProjectDir()  */
-define('ROADIZ_ROOT', dirname(__DIR__));
-// Include Composer Autoload (relative to project root).
 require(dirname(__DIR__) . "/vendor/autoload.php");
 
 $allowedIp = [
@@ -23,15 +20,14 @@ $allowedIp = [
     //'172.21.0.1', // docker host (FOR DEV ONLY)
     '127.0.0.1', 'fe80::1', '::1', ':ffff:127.0.0.1', '::ffff:127.0.0.1' // localhost
 ];
-if (getenv('DEFAULT_GATEWAY')) {
-    $allowedIp[] = getenv('DEFAULT_GATEWAY');
-    $allowedIp[] = '::ffff:' . getenv('DEFAULT_GATEWAY');
+if ($_SERVER['DEFAULT_GATEWAY']) {
+    $allowedIp[] = $_SERVER['DEFAULT_GATEWAY'];
+    $allowedIp[] = '::ffff:' . $_SERVER['DEFAULT_GATEWAY'];
 }
 
 // This check prevents access to debug front controllers that are deployed by accident to production servers.
 // Feel free to remove this, extend it, or make something more sophisticated.
 if (isset($_SERVER['HTTP_CLIENT_IP'])
-    || isset($_SERVER['HTTP_X_FORWARDED_FOR'])
     || !(in_array(@$_SERVER['REMOTE_ADDR'], $allowedIp) || php_sapi_name() === 'cli-server')
 ) {
     $response = new JsonResponse([

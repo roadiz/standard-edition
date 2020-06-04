@@ -55,6 +55,8 @@ services:
             - default
         environment:
             USE_APP_CACHE: ${USE_APP_CACHE}
+            TRUSTED_PROXIES: ${TRUSTED_PROXIES}
+            TRUSTED_HOSTS: ${TRUSTED_HOSTS}
             USER_UID: ${USER_UID}
             DEFAULT_GATEWAY: ${DEFAULT_GATEWAY}
             BLACKFIRE_LOG_LEVEL: ${BLACKFIRE_LOG_LEVEL}

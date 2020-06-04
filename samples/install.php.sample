@@ -26,16 +26,13 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
     header('HTTP/1.0 403 Forbidden');
     exit('You are not allowed to access this file ('.$_SERVER['REMOTE_ADDR'].'). Check '.basename(__FILE__).' for more information.');
 }
-
-define('ROADIZ_ROOT', dirname(__DIR__));
 // Include Composer Autoload (relative to project root).
-require(ROADIZ_ROOT . "/vendor/autoload.php");
+require(dirname(__DIR__) . "/vendor/autoload.php");
 
 Debug::enable();
 
 $kernel = new AppKernel('install', true);
 $request = Request::createFromGlobals();
-
 $response = $kernel->handle($request);
 $response->send();
 $kernel->terminate($request, $response);

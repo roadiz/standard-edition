@@ -15,17 +15,21 @@ if (PHP_VERSION_ID < 70200) {
  * This allows Backend users to preview nodes pages
  * that has not been published yet.
  */
-/** @deprecated Use Kernel::getProjectDir()  */
-define('ROADIZ_ROOT', dirname(__DIR__));
-// Include Composer Autoload (relative to project root).
 require(dirname(__DIR__) . "/vendor/autoload.php");
 
 $kernel = new AppKernel('prod', false, true);
 $request = Request::createFromGlobals();
 
-// Using Front Proxy (HA or Docker)
-// Trust incoming request IP as your reverse proxy
-// Request::setTrustedProxies([$request->server->get('REMOTE_ADDR')], Request::HEADER_X_FORWARDED_ALL);
+if ($trustedProxies = $_SERVER['TRUSTED_PROXIES'] ?? false) {
+    Request::setTrustedProxies(
+        explode(',', $trustedProxies),
+        Request::HEADER_X_FORWARDED_ALL ^ Request::HEADER_X_FORWARDED_HOST
+    );
+}
+
+if ($trustedHosts = $_SERVER['TRUSTED_HOSTS'] ?? false) {
+    Request::setTrustedHosts([$trustedHosts]);
+}
 
 $response = $kernel->handle($request);
 $response->send();
