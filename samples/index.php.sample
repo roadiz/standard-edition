@@ -11,16 +11,6 @@ if (PHP_VERSION_ID < 70200) {
 
 require(dirname(__DIR__) . "/vendor/autoload.php");
 
-/*
- * Use Symfony internal http cache (use Varnish instead if possible)
- */
-if ((bool) $_SERVER['USE_APP_CACHE']) {
-    $kernel = new AppCache($kernel);
-    // When using the HttpCache, you need to call the method in your front controller
-    // instead of relying on the configuration parameter
-    Request::enableHttpMethodParameterOverride();
-}
-
 if ($trustedProxies = $_SERVER['TRUSTED_PROXIES'] ?? false) {
     Request::setTrustedProxies(
         explode(',', $trustedProxies),
@@ -33,6 +23,17 @@ if ($trustedHosts = $_SERVER['TRUSTED_HOSTS'] ?? false) {
 }
 
 $kernel = new AppKernel('prod', false);
+
+/*
+ * Use Symfony internal http cache (use Varnish instead if possible)
+ */
+if ((bool) $_SERVER['USE_APP_CACHE']) {
+    $kernel = new AppCache($kernel);
+    // When using the HttpCache, you need to call the method in your front controller
+    // instead of relying on the configuration parameter
+    Request::enableHttpMethodParameterOverride();
+}
+
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
 $response->send();
