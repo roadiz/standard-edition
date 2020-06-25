@@ -11,16 +11,16 @@ if (PHP_VERSION_ID < 70200) {
 }
 
 $allowedIp = [
-    '10.0.2.2',     // vagrant host (forwarded)
-    '192.168.33.1', // vagrant host (private)
-    //'172.21.0.1', // docker host (FOR DEV ONLY)
     '127.0.0.1', 'fe80::1', '::1', ':ffff:127.0.0.1', '::ffff:127.0.0.1' // localhost
 ];
+if ($_SERVER['DEFAULT_GATEWAY']) {
+    $allowedIp[] = $_SERVER['DEFAULT_GATEWAY'];
+    $allowedIp[] = '::ffff:' . $_SERVER['DEFAULT_GATEWAY'];
+}
 
 // This check prevents access to debug front controllers that are deployed by accident to production servers.
 // Feel free to remove this, extend it, or make something more sophisticated.
 if (isset($_SERVER['HTTP_CLIENT_IP'])
-    || isset($_SERVER['HTTP_X_FORWARDED_FOR'])
     || !(in_array(@$_SERVER['REMOTE_ADDR'], $allowedIp) || php_sapi_name() === 'cli-server')
 ) {
     header('HTTP/1.0 403 Forbidden');
