@@ -90,7 +90,8 @@
             "samples/dev.php.sample": "./web/dev.php",
             "samples/index.php.sample": "./web/index.php",
             "samples/preview.php.sample": "./web/preview.php",
-            "samples/Vagrantfile.sample": "./Vagrantfile"
+            "samples/Vagrantfile.sample": "./Vagrantfile",
+            "./.env.dist": "./.env"
         },
         "config-path": "./app/conf/config.yml"
     }
