@@ -4,7 +4,10 @@
     "type": "project",
     "require": {
         "php": ">=7.2",
-        "roadiz/roadiz": "~1.4.0"
+        "roadiz/roadiz": "dev-develop",
+        "roadiz/models": "dev-develop",
+        "roadiz/documents": "dev-develop",
+        "roadiz/markdown": "dev-develop"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.3",
