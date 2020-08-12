@@ -31,6 +31,10 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 ADD php.ini /usr/local/etc/php/php.ini
 ADD zz-docker.conf /usr/local/etc/php-fpm.d/zz-docker.conf
 ADD crontab.txt /crontab.txt
+ADD before_launch.sh /before_launch.sh
+
+RUN /usr/bin/crontab -u www-data /crontab.txt && \
+    chmod +x /before_launch.sh
 
 VOLUME /var/www/html
 WORKDIR /var/www/html
@@ -38,6 +42,7 @@ WORKDIR /var/www/html
 RUN ln -s /usr/share/nginx/html/bin/roadiz /usr/local/bin/roadiz \
     && usermod -u ${USER_UID} www-data \
     && /usr/bin/crontab -u www-data /crontab.txt \
+    && chmod +x /before_launch.sh \
     && chown -R www-data:www-data /var/www/html/
 
 ENTRYPOINT exec /usr/bin/supervisord -n -c /etc/supervisord.conf

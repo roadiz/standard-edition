@@ -13,7 +13,10 @@ COPY --chown=www-data:www-data samples/index.php.sample /var/www/html/web/index.
 COPY --chown=www-data:www-data samples/preview.php.sample /var/www/html/web/preview.php
 COPY --chown=www-data:www-data samples/clear_cache.php.sample /var/www/html/web/clear_cache.php
 
-RUN /usr/bin/crontab -u www-data /crontab.txt
+COPY docker/php74-nginx-alpine/before_launch.sh /before_launch.sh
+
+RUN /usr/bin/crontab -u www-data /crontab.txt && \
+    chmod +x /before_launch.sh
 
 VOLUME /var/www/html/files \
        /var/www/html/web/files \
