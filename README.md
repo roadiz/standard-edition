@@ -4,7 +4,7 @@
 
 Roadiz is a modern CMS based on a polymorphic node system which can handle many types of services and contents.
 Its back-office has been developed with a high sense of design and user experience.
-Its theming system is built to live independently from back-office allowing easy switching
+Its theming system is built to live independently of back-office allowing easy switching
 and multiple themes for one content basis. For example, it allows you to create one theme
 for your desktop website and another one for your mobile, using the same node hierarchy.
 Roadiz is released under MIT license, so you can reuse
@@ -15,11 +15,9 @@ and distribute its code for personal and commercial projects.
 * [Usage](#usage)
   + [Update Roadiz and your own theme assets](#update-roadiz-and-your-own-theme-assets)
   + [Develop with *PHP* internal server](#develop-with-php-internal-server)
-  + [Develop with *Vagrant*](#develop-with-vagrant)
   + [Develop with *Docker*](#develop-with-docker)
     - [Install your theme assets and execute Roadiz commands](#install-your-theme-assets-and-execute-roadiz-commands)
     - [On Linux](#on-linux)
-    - [On Mac or Windows](#on-mac-or-windows)
 * [Update Roadiz sources](#update-roadiz-sources)
 * [Maximize performances for production](#maximize-performances-for-production)
   + [Optimize class autoloader](#optimize-class-autoloader)
@@ -53,9 +51,10 @@ yarn; # or npm install
 yarn build; # or npm run build
 ```
 
-Composer will automatically create a new project based on Roadiz and download every dependencies. 
+Composer will automatically create a new project based on Roadiz and download every dependency. 
 
-Composer script will copy a default configuration file and your entry-points in `web/` folder automatically and a sample `Vagrantfile` in your project root.
+Composer script will copy a default configuration file and your entry-points in `web/` folder automatically 
+and a sample `Vagrantfile` in your project root.
 
 ### Update Roadiz and your own theme assets
 
@@ -69,15 +68,13 @@ bin/roadiz themes:assets:install --symlink --relative FooBar;
 
 ### Develop with *Docker*
 
-*Docker* on Linux will provide awesome performances and a production-like environment 
+*Docker* on Linux will provide awesome performances, and a production-like environment 
 without bloating your development machine:
-
-- Copy `.env.dist` file to `.env`
 
 ```bash
 # Copy sample environment variables
 # and adjust them against your needs.
-cp .env.dist .env;
+nano .env;
 # Build PHP image
 docker-compose build;
 # Create and start containers
@@ -96,8 +93,6 @@ yarn build; # npm run build
 
 ### Develop with *PHP* internal server
 
-- Copy `.env.dist` file to `.env`
-
 ````bash
 # Edit your Makefile "DEV_DOMAIN" variable to use a dedicated port
 # to your project and your theme name.
@@ -106,38 +101,6 @@ nano Makefile;
 # Launch PHP server
 make dev-server;
 ````
-
-### Develop with *Vagrant*
-
-For development, here are some useful commands: 
-
-```bash
-# Edit your Vagrantfile and use a dedicated IP
-# add this IP to your /etc/hosts
-nano Vagrantfile;
-
-# Adapt Makefile with your theme name and NPM/Yarn
-# This will be useful to generate assets and clear cache
-# in one command
-nano Makefile; 
-cd themes/FooBarTheme;
-# Install NPM dependencies for your front-end dev environment.
-# Use YARN
-yarn;
-# OR use vanilla NPM
-npm install;
-
-# Init Vagrant dev VM
-# This may take several minute if your 
-# launching Vagrant up for the first time
-# as it has to download Roadiz box which is ~ 1,2GB
-cd ../../;
-vagrant up;
-```
-
-If you have a full PHP-MySQL server running directly on your development machine you can
-ignore *Vagrant* and use it. Make sure that your virtual host is configured to use `web/`
-folder as *server root*.
 
 #### Install your theme assets and execute Roadiz commands
 
@@ -168,19 +131,6 @@ So use the same uid in your `.env` file **before** starting and building your do
 USER_UID=1000
 ```
 
-#### On Mac or Windows
-
-Unfortunately, on *macOS* and *Windows* performances will be worse than *Vagrant* due to
-the *volumes* sharing system. You can use [docker-sync](http://docker-sync.io/) to improve IO performances 
-with your shared volumes.    
-Use following command **instead of** `docker-compose up -d`:
-
-```bash
-# Make sure you setup docker-sync on your computer before.
-# gem install docker-sync
-docker-sync-stack start
-```
-
 ## Update Roadiz sources
 
 Simply call `composer update` to upgrade Roadiz. 
@@ -209,12 +159,12 @@ realpath_cache_ttl=600
 
 You can create a standalone *Docker* image with your Roadiz project thanks to our `roadiz/php74-nginx-alpine` base 
 image, a continuous integration tool such as *Gitlab CI* and a private *Docker* registry. 
-All your theme assets will be compiled in a controlled environment and your production website 
+All your theme assets will be compiled in a controlled environment, and your production website 
 will have a minimal downtime at each update.
 
 Make sure you don’t ignore `package.lock` or `yarn.lock` in your themes not to get dependency errors when your 
 CI system will compile your theme assets. You may do the same for your project `composer.lock` to make sure 
-that you’ll use the same dependencies version in dev as well as in your CI jobs.
+you’ll use the same dependencies' version in dev as well as in your CI jobs.
 
 *Standard Edition* provides a basic configuration set with a `Dockerfile`:
 

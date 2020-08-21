@@ -95,4 +95,7 @@ ngrok:
 
 test:
 	php vendor/bin/phpcbf -p
-	php vendor/bin/phpstan analyse -c phpstan.neon -l 2 themes
+	php vendor/bin/phpstan analyse -c phpstan.neon -l max themes
+
+blackfire:
+	docker-compose exec blackfire blackfire curl http://app

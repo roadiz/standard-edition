@@ -14,6 +14,12 @@ doctrine:
     default_table_options:
         charset: utf8mb4
         collate: utf8mb4_unicode_ci
+# Choose a Doctrine strategy for NodesSources
+# inheritance classes. BE CAREFUL, if you change this
+# setting after creating content in your website, all
+# node-sources data will be lost.
+inheritance:
+    type: joined
 # Register here your themes…
 themes: []
 # http://symfony.com/doc/current/reference/configuration/doctrine.html#caching-drivers

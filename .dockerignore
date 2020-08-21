@@ -35,6 +35,7 @@ pimple.json
 !app/gen-src/GeneratedNodeSources/.gitignore
 !app/gen-src/Proxies/.gitignore
 !docker/php74-nginx-alpine/crontab.txt
+!docker/php74-nginx-alpine/before_launch.sh
 !themes/BaseTheme/static
 !themes/BaseTheme/Resources/views/partials/*
 !themes/BaseTheme/Resources/views/base.html.twig

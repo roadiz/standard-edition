@@ -9,6 +9,7 @@ services:
         image: mysql:5.7
         volumes:
             - "./.data/db:/var/lib/mysql:delegated"
+            - "./docker/mysql/performances.cnf:/etc/mysql/conf.d/performances.cnf"
         environment:
             MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
             MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -24,6 +25,19 @@ services:
             MYSQL_DATABASE: ${MYSQL_DATABASE}
             MYSQL_USER: ${MYSQL_USER}
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+        networks:
+            - frontproxynet
+            - default
+        labels:
+            # Replace example_pma by your service name
+            - "traefik.enable=true"
+            - "traefik.http.services.example_pma.loadbalancer.server.scheme=http"
+            - "traefik.http.services.example_pma.loadbalancer.server.port=80"
+            - "traefik.http.services.example_pma.loadbalancer.passhostheader=true"
+            # Listen HTTP
+            - "traefik.http.routers.example_pma.entrypoints=http"
+            - "traefik.http.routers.example_pma.rule=Host(${HOSTNAME_PMA})"
+            - "traefik.http.routers.example_pma.service=example_pma"
 
     app:
         build:
@@ -42,8 +56,16 @@ services:
             - default
         environment:
             USE_APP_CACHE: ${USE_APP_CACHE}
+            TRUSTED_PROXIES: ${TRUSTED_PROXIES}
+            TRUSTED_HOSTS: ${TRUSTED_HOSTS}
             USER_UID: ${USER_UID}
             DEFAULT_GATEWAY: ${DEFAULT_GATEWAY}
+            BLACKFIRE_LOG_LEVEL: ${BLACKFIRE_LOG_LEVEL}
+            BLACKFIRE_SERVER_ID: ${BLACKFIRE_SERVER_ID}
+            BLACKFIRE_SERVER_TOKEN: ${BLACKFIRE_SERVER_TOKEN}
+            BLACKFIRE_CLIENT_ID: ${BLACKFIRE_CLIENT_ID}
+            BLACKFIRE_CLIENT_TOKEN: ${BLACKFIRE_CLIENT_TOKEN}
+            BLACKFIRE_ENDPOINT: "https://blackfire.io"
         labels:
             # Replace example by your service name
             - "traefik.enable=true"
@@ -72,11 +94,47 @@ services:
         command:
             - solr-precreate
             - roadiz
+        networks:
+            - frontproxynet
+            - default
+        labels:
+            # Replace example_solr by your service name
+            - "traefik.enable=true"
+            - "traefik.http.services.example_solr.loadbalancer.server.scheme=http"
+            - "traefik.http.services.example_solr.loadbalancer.server.port=8983"
+            - "traefik.http.services.example_solr.loadbalancer.passhostheader=true"
+            # Listen HTTP
+            - "traefik.http.routers.example_solr.entrypoints=http"
+            - "traefik.http.routers.example_solr.rule=Host(${HOSTNAME_SOLR})"
+            - "traefik.http.routers.example_solr.service=example_solr"
 
     mailer:
         image: mailhog/mailhog
         ports:
             - ${MAILER_PORT}:8025/tcp
+        networks:
+            - frontproxynet
+            - default
+        labels:
+            # Replace example_mailer by your service name
+            - "traefik.enable=true"
+            - "traefik.http.services.example_mailer.loadbalancer.server.scheme=http"
+            - "traefik.http.services.example_mailer.loadbalancer.server.port=8025"
+            - "traefik.http.services.example_mailer.loadbalancer.passhostheader=true"
+            # Listen HTTP
+            - "traefik.http.routers.example_mailer.entrypoints=http"
+            - "traefik.http.routers.example_mailer.rule=Host(${HOSTNAME_MAILER})"
+            - "traefik.http.routers.example_mailer.service=example_mailer"
+
+    blackfire:
+        image: blackfire/blackfire
+        environment:
+            # Exposes BLACKFIRE_* environment variables from the host
+            BLACKFIRE_LOG_LEVEL: ${BLACKFIRE_LOG_LEVEL}
+            BLACKFIRE_SERVER_ID: ${BLACKFIRE_SERVER_ID}
+            BLACKFIRE_SERVER_TOKEN: ${BLACKFIRE_SERVER_TOKEN}
+            BLACKFIRE_CLIENT_ID: ${BLACKFIRE_CLIENT_ID}
+            BLACKFIRE_CLIENT_TOKEN: ${BLACKFIRE_CLIENT_TOKEN}
 
     varnish:
         build:

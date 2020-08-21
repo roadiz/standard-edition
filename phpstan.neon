@@ -14,5 +14,6 @@ parameters:
         - '#Call to an undefined method RZ\\Roadiz\\Core\\AbstractEntities\\LeafInterface#'
         - '#Doctrine\\Persistence\\ObjectRepository#'
     reportUnmatchedIgnoredErrors: false
+    checkMissingIterableValueType: false
 includes:
     - vendor/phpstan/phpstan-doctrine/extension.neon
