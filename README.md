@@ -33,7 +33,8 @@ and distribute its code for personal and commercial projects.
 
 ## Standard edition
 
-This is the **production-ready edition** for Roadiz. It is meant to setup your *Apache/Nginx* server root to the `web/` folder, keeping your app sources and themes secure.
+This is the **production-ready edition** for Roadiz. It is meant to set up your *Apache/Nginx* server root 
+to the `web/` folder, keeping your app sources and themes secure.
 
 ## Usage
 
