@@ -1,4 +1,4 @@
 *
 !.gitignore
-!fonts/
-!private/
+!fonts/.gitkeep
+!private/.gitkeep

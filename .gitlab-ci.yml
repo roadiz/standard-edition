@@ -24,7 +24,7 @@ example_test:
     script:
         - composer install --no-scripts
         - vendor/bin/phpcs
-        - vendor/bin/phpstan analyse -c phpstan.neon -l 2 themes
+        - vendor/bin/phpstan analyse -c phpstan.neon -l max themes
 
 example_build:
     stage: build
@@ -68,8 +68,6 @@ example_build:
         - composer run-script post-install-cmd
         # Create hard copies of theme assets
         - composer run-script pre-docker
-        # Remove HUGE node_module to speed up artifact uploads and downloads
-        - rm -rf themes/BaseTheme/node_modules
         # No need to include dev entry points
         - rm -rf web/dev.php
         - rm -rf web/install.php
