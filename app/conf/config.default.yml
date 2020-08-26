@@ -3,7 +3,8 @@ appNamespace: "chooseAnUniqueNameForYourApp"
 timezone: "Europe/Paris"
 doctrine:
     driver: "pdo_mysql"
-    host: "localhost"
+    #host: "localhost"
+    host: "db"
     user: ""
     password: ""
     dbname: ""
@@ -19,7 +20,7 @@ doctrine:
 # setting after creating content in your website, all
 # node-sources data will be lost.
 inheritance:
-    type: joined
+    type: single_table
 # Register here your themes…
 themes: []
 # http://symfony.com/doc/current/reference/configuration/doctrine.html#caching-drivers
@@ -46,8 +47,9 @@ security:
 mailer:
     # Do not use NULL mailer type.
     type: smtp
-    host: "localhost"
-    port: 25
+#    host: "localhost"
+    host: "mailer"
+    port: 1025
     encryption: false
     username: ""
     password: ""
@@ -82,7 +84,8 @@ assetsProcessing:
 #solr:
 #    endpoint:
 #        localhost:
-#            host: "localhost"
+#            #host: "localhost"
+#            host: "solr"
 #            port: "8983"
 #            path: "/"
 #            core: "mycore"
