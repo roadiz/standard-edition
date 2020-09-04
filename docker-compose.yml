@@ -162,6 +162,8 @@ services:
 networks:
     frontproxynet:
         external: true
+    # If you need to use port forwarding, fixing default gateway can be useful
+    # to keep same host IP address between service restarts
     default:
         ipam:
             driver: default

@@ -1,6 +1,5 @@
 FROM roadiz/php74-nginx-alpine:latest
 MAINTAINER Ambroise Maupate <ambroise@rezo-zero.com>
-ENV USER_UID=1000
 ARG USER_UID=1000
 ENV ROADIZ_ENV=prod
 

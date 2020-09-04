@@ -2,13 +2,13 @@
 FROM roadiz/php74-nginx-alpine
 MAINTAINER Ambroise Maupate <ambroise@rezo-zero.com>
 
-ENV USER_UID=1000
 ARG USER_UID=1000
 ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV ROADIZ_ENV=dev
 ENV USE_APP_CACHE=0
 
 RUN apk add --no-cache git openssh \
+    && echo "USER_UID: ${USER_UID}\n" \
     && usermod -u ${USER_UID} www-data \
     && groupmod -g ${USER_UID} www-data \
     && version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \

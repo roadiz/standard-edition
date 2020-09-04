@@ -92,6 +92,12 @@ yarn; # npm install;
 yarn build; # npm run build
 ```
 
+##### Issue with Solr container
+
+*Solr* container declares its volume in `.data/solr` in your project folder. After first launch this 
+folder may be created with `root` owner causing *Solr* not to be able to populate it. Just run: \
+`sudo chown -R $USER_UID:$USER_UID .data` (replacing `$USER_UID` with your local user *id*).
+
 ### Develop with *PHP* internal server
 
 ````bash
