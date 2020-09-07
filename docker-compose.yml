@@ -6,7 +6,6 @@ services:
             context: ./docker/mysql
             args:
                 USER_UID: ${USER_UID}
-        image: mysql:5.7
         volumes:
             - "./.data/db:/var/lib/mysql:delegated"
             - "./docker/mysql/performances.cnf:/etc/mysql/conf.d/performances.cnf"
@@ -82,7 +81,6 @@ services:
             context: ./docker/solr
             args:
                 USER_UID: ${USER_UID}
-        image: solr:8-slim
         ports:
             - "${SOLR_PORT}:8983/tcp"
         volumes:
