@@ -6,6 +6,8 @@ services:
             context: ./docker/mysql
             args:
                 USER_UID: ${USER_UID}
+        networks:
+            default:
         volumes:
             - "./.data/db:/var/lib/mysql:delegated"
             - "./docker/mysql/performances.cnf:/etc/mysql/conf.d/performances.cnf"
@@ -25,8 +27,10 @@ services:
             MYSQL_USER: ${MYSQL_USER}
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
         networks:
-            - frontproxynet
-            - default
+            frontproxynet:
+                aliases:
+                    - example_pma
+            default:
         labels:
             # Replace example_pma by your service name
             - "traefik.enable=true"
@@ -54,8 +58,10 @@ services:
         volumes:
             - ${ROADIZ_APP_PATH}:/var/www/html:cached
         networks:
-            - frontproxynet
-            - default
+            frontproxynet:
+                aliases:
+                    - example_app
+            default:
         environment:
             USE_APP_CACHE: ${USE_APP_CACHE}
             TRUSTED_PROXIES: ${TRUSTED_PROXIES}
@@ -95,8 +101,10 @@ services:
             - solr-precreate
             - roadiz
         networks:
-            - frontproxynet
-            - default
+            frontproxynet:
+                aliases:
+                    - example_solr
+            default:
         labels:
             # Replace example_solr by your service name
             - "traefik.enable=true"
@@ -113,8 +121,10 @@ services:
         ports:
             - ${MAILER_PORT}:8025/tcp
         networks:
-            - frontproxynet
-            - default
+            frontproxynet:
+                aliases:
+                    - example_mailer
+            default:
         labels:
             # Replace example_mailer by your service name
             - "traefik.enable=true"
@@ -147,8 +157,10 @@ services:
         ports:
             - ${VARNISH_PORT}:80/tcp
         networks:
-            - frontproxynet
-            - default
+            frontproxynet:
+                aliases:
+                    - example_varnish
+            default:
         labels:
             # Replace example by your service name
             - "traefik.enable=true"
