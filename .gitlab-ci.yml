@@ -23,8 +23,10 @@ example_test:
             - vendor/
     script:
         - composer install --no-scripts
+        - composer run-script post-install-cmd
         - vendor/bin/phpcs
         - vendor/bin/phpstan analyse -c phpstan.neon -l max themes
+        - php bin/roadiz lint:twig themes/BaseTheme/Resources/views
 
 example_build:
     stage: build
