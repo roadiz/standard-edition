@@ -13,6 +13,8 @@ parameters:
         - '#GeneratedNodeSources\\NS(?:[a-zA-Z]+)#'
         - '#Call to an undefined method RZ\\Roadiz\\Core\\AbstractEntities\\LeafInterface#'
         - '#Doctrine\\Persistence\\ObjectRepository#'
+        - '#Call to an undefined method [a-zA-Z0-9\\_\\<\\>]+::findOneBy[A-Z][a-zA-Z]*\(\)#'
+        - '#Call to an undefined method [a-zA-Z0-9\\_\\<\\>]+::findBy[A-Z][a-zA-Z]*\(\)#'
     reportUnmatchedIgnoredErrors: false
     checkMissingIterableValueType: false
 includes:
