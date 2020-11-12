@@ -1,5 +1,4 @@
 #
-# Base theme
 # Development tasks
 #
 include .env
@@ -96,7 +95,7 @@ ngrok:
 test:
 	php vendor/bin/phpcbf -p
 	php vendor/bin/phpstan analyse -c phpstan.neon -l max themes
-	php bin/roadiz lint:twig themes/BaseTheme/Resources/views
+	php bin/roadiz lint:twig themes/${THEME}/Resources/views
 
 blackfire:
 	docker-compose exec blackfire blackfire curl http://app
