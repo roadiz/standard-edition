@@ -80,3 +80,16 @@ assetsProcessing:
 #            host: '%env(string:VARNISH_HOST)%'
 #            domainName: '%env(string:VARNISH_DOMAIN)%'
 
+#
+# Monolog non-default configuration
+#
+#monolog:
+#    handlers:
+#        default:
+#            type: rotating_file
+#            path: '%kernel.log_dir%/roadiz.log'
+#            level: DEBUG
+#        sentry:
+#            type: sentry
+#            level: WARNING
+#            url: https://xxxxx@xxxxx/xxxx
