@@ -19,6 +19,7 @@
 !/.data/solr/.gitkeep
 !/.data/db/.gitkeep
 /.env
+project_env.sh
 
 # Roadiz theme
 !/themes
