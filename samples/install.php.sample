@@ -4,12 +4,6 @@ declare(strict_types=1);
 use RZ\Roadiz\Core\HttpFoundation\Request;
 use Symfony\Component\ErrorHandler\Debug;
 
-if (PHP_VERSION_ID < 70200) {
-    echo 'Your PHP version is ' . phpversion() . "." . PHP_EOL;
-    echo 'You need a least PHP version 7.2.0';
-    exit(1);
-}
-
 $allowedIp = [
     '127.0.0.1', 'fe80::1', '::1', ':ffff:127.0.0.1', '::ffff:127.0.0.1' // localhost
 ];
@@ -26,8 +20,8 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
     header('HTTP/1.0 403 Forbidden');
     exit('You are not allowed to access this file ('.$_SERVER['REMOTE_ADDR'].'). Check '.basename(__FILE__).' for more information.');
 }
-// Include Composer Autoload (relative to project root).
-require(dirname(__DIR__) . "/vendor/autoload.php");
+
+require(dirname(__DIR__) . "/app/bootstrap.php");
 
 Debug::enable();
 

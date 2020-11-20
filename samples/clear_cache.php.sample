@@ -7,12 +7,7 @@ use RZ\Roadiz\Core\HttpFoundation\Request;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-if (PHP_VERSION_ID < 70200) {
-    echo 'Your PHP version is ' . phpversion() . "." . PHP_EOL;
-    echo 'You need a least PHP version 7.2.0';
-    exit(1);
-}
-require(dirname(__DIR__) . "/vendor/autoload.php");
+require(dirname(__DIR__) . "/app/bootstrap.php");
 
 $allowedIp = [
     '127.0.0.1', 'fe80::1', '::1', ':ffff:127.0.0.1', '::ffff:127.0.0.1' // localhost
