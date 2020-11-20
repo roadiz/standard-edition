@@ -29,9 +29,9 @@ cacheDriver:
     host: ~
     port: ~
 security:
-    secret: '%env(string:SECURITY_SECRET)%'
+    secret: '%env(string:APP_SECURITY_SECRET)%'
     session_name: roadiz_token
-    session_cookie_secure: '%env(bool:SECURITY_COOKIE_SECURE)%'
+    session_cookie_secure: '%env(bool:APP_SECURITY_COOKIE_SECURE)%'
     session_cookie_httponly: true
     algorithm: argon2i
 
@@ -50,10 +50,10 @@ rememberMeLifetime: 2592000
 assetsProcessing:
     # gd or imagick (gd does not support TIFF and PSD formats)
     driver: gd
-    defaultQuality: '%env(int:ASSETS_DEFAULT_QUALITY)%'
+    defaultQuality: '%env(int:APP_ASSETS_DEFAULT_QUALITY)%'
     # pixel size limit () after roadiz
     # should create a smaller copy.
-    maxPixelSize: '%env(int:ASSETS_MAX_PIXEL_SIZE)%'
+    maxPixelSize: '%env(int:APP_ASSETS_MAX_PIXEL_SIZE)%'
     jpegoptimPath: /usr/bin/jpegoptim
     pngquantPath: /usr/bin/pngquant
     subscribers: []

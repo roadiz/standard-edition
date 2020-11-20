@@ -43,6 +43,8 @@ services:
             - "traefik.http.routers.example_pma.service=example_pma"
 
     app:
+        # Need to pass all vars to docker env for Crontab and supervisor scripts
+        env_file: "./.env"
         build:
             # Use Nginx
             context: ./docker/php74-nginx-alpine
