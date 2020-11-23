@@ -14,8 +14,8 @@ define('ROADIZ_ROOT', dirname(realpath(__DIR__)));
 require dirname(realpath(__DIR__)) . "/app/bootstrap.php";
 
 $input = new ArgvInput();
-$env = $input->getParameterOption(array('--env', '-e'), getenv('ROADIZ_ENV') ?: 'dev');
-$debug = getenv('ROADIZ_DEBUG') !== '0' && !$input->hasParameterOption(array('--no-debug', '')) && $env !== 'prod';
+$env = $input->getParameterOption(array('--env', '-e'), getenv('APP_ENV') ?: 'dev');
+$debug = getenv('APP_DEBUG') !== '0' && !$input->hasParameterOption(array('--no-debug', '')) && $env !== 'prod';
 $preview = $input->hasParameterOption(array('--preview', ''));
 
 if ($debug) {
