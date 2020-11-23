@@ -3,8 +3,8 @@ MAINTAINER Ambroise Maupate <ambroise@rezo-zero.com>
 
 ARG USER_UID=1000
 ENV COMPOSER_ALLOW_SUPERUSER=1
-ENV ROADIZ_ENV=dev
-ENV USE_APP_CACHE=0
+ENV APP_ENV=dev
+ENV APP_CACHE=0
 
 # Display errors
 ADD php.ini /usr/local/etc/php/php.ini

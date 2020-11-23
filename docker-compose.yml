@@ -65,7 +65,7 @@ services:
                     - example_app
             default:
         environment:
-            USE_APP_CACHE: ${USE_APP_CACHE}
+            APP_CACHE: ${APP_CACHE}
             TRUSTED_PROXIES: ${TRUSTED_PROXIES}
             USER_UID: ${USER_UID}
             DEFAULT_GATEWAY: ${DEFAULT_GATEWAY}
