@@ -2,6 +2,7 @@ FROM roadiz/php74-nginx-alpine:latest
 MAINTAINER Ambroise Maupate <ambroise@rezo-zero.com>
 ARG USER_UID=1000
 ENV APP_ENV=prod
+ENV APP_DEBUG=0
 
 RUN usermod -u ${USER_UID} www-data \
     && groupmod -g ${USER_UID} www-data
