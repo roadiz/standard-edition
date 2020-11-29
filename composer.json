@@ -3,11 +3,13 @@
     "description": "Roadiz standard edition",
     "type": "project",
     "require": {
-        "php": ">=7.2",
+        "php": ">=7.4",
         "roadiz/roadiz": "~1.6.0 || dev-develop",
         "roadiz/models": "~1.6.0 || dev-develop",
         "roadiz/documents": "~1.6.0 || dev-develop",
         "roadiz/markdown": "~1.6.0 || dev-develop",
+        "ambroisemaupate/intervention-request": "^3.2.0 || dev-develop",
+        "intervention/image": "^2.5 || dev-master",
         "rezozero/tree-walker": "~0.8"
     },
     "require-dev": {
@@ -17,7 +19,7 @@
     },
     "suggest": {
         "sentry/sentry": "Allows monolog to send your log messages to a Sentry instance.",
-        "php-http/guzzle6-adapter": "Required for sentry/sentry",
+        "php-http/guzzle7-adapter": "Required for sentry/sentry",
         "guzzlehttp/psr7": "Required for sentry/sentry",
         "roadiz/abstract-blog-theme": "Enhance your theme with many useful blog features.",
         "roadiz/abstract-pdf-theme": "Enhance your theme with PDF generation features.",
