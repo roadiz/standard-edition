@@ -1,12 +1,13 @@
 ---
-appNamespace: "chooseAnUniqueNameForYourApp"
-timezone: "Europe/Paris"
+appNamespace: '%env(string:APP_NAMESPACE)%'
+timezone: '%env(string:APP_TIMEZONE)%'
 doctrine:
     driver: "pdo_mysql"
     host: '%env(string:MYSQL_HOST)%'
     user: '%env(string:MYSQL_USER)%'
     password: '%env(string:MYSQL_PASSWORD)%'
     dbname: '%env(string:MYSQL_DATABASE)%'
+    server_version: '%env(string:MYSQL_VERSION)%'
     # "utf8mb4" charset requires at least mysql 5.7
     # due to large index requirement.
     # otherwise change it to "utf8"
@@ -30,7 +31,7 @@ cacheDriver:
     port: ~
 security:
     secret: '%env(string:APP_SECURITY_SECRET)%'
-    session_name: roadiz_token
+    session_name: '%env(string:APP_SECURITY_SESSION_NAME)%'
     session_cookie_secure: '%env(bool:APP_SECURITY_COOKIE_SECURE)%'
     session_cookie_httponly: true
     algorithm: argon2i
@@ -49,7 +50,7 @@ rememberMeLifetime: 2592000
 # settings for generating image on the fly
 assetsProcessing:
     # gd or imagick (gd does not support TIFF and PSD formats)
-    driver: gd
+    driver: '%env(string:APP_ASSETS_DRIVER)%'
     defaultQuality: '%env(int:APP_ASSETS_DEFAULT_QUALITY)%'
     # pixel size limit () after roadiz
     # should create a smaller copy.
@@ -92,4 +93,4 @@ assetsProcessing:
 #        sentry:
 #            type: sentry
 #            level: WARNING
-#            url: https://xxxxx@xxxxx/xxxx
+#            url: '%env(string:APP_SENTRY_DSN)%'

@@ -9,7 +9,6 @@
         "roadiz/documents": "~1.6.0 || dev-develop",
         "roadiz/markdown": "~1.6.0 || dev-develop",
         "ambroisemaupate/intervention-request": "^3.2.0 || dev-develop",
-        "intervention/image": "^2.5 || dev-master",
         "rezozero/tree-walker": "~0.8"
     },
     "require-dev": {
