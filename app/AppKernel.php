@@ -77,6 +77,5 @@ class AppKernel extends Kernel
         /*
          * Add your own service providers.
          */
-        $container->register(new \Themes\BaseTheme\Services\BaseThemeServiceProvider());
     }
 }
