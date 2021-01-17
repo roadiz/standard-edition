@@ -17,5 +17,6 @@ parameters:
         - '#Call to an undefined method [a-zA-Z0-9\\_\\<\\>]+::findBy[A-Z][a-zA-Z]*\(\)#'
     reportUnmatchedIgnoredErrors: false
     checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
 includes:
     - vendor/phpstan/phpstan-doctrine/extension.neon

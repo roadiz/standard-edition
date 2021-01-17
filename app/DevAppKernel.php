@@ -2,11 +2,8 @@
 declare(strict_types=1);
 
 /**
- * Class DevAppKernel.
- *
  * Customize Roadiz kernel with your own project settings for development.
  */
-
 class DevAppKernel extends AppKernel
 {
     /**

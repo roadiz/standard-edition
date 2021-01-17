@@ -4,11 +4,8 @@ declare(strict_types=1);
 use RZ\Roadiz\Core\Kernel;
 
 /**
- * Class AppKernel.
- *
  * Customize Roadiz kernel with your own project settings.
  */
-
 class AppKernel extends Kernel
 {
     /**
@@ -53,18 +50,6 @@ class AppKernel extends Kernel
     public function getFontsFilesPath()
     {
         return $this->getProjectDir() . $this->getFontsFilesBasePath();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function initEvents()
-    {
-        parent::initEvents();
-
-        /*
-         * Add your subscribers and listeners.
-         */
     }
 
     /**
