@@ -55,7 +55,7 @@ yarn build; # or npm run build
 Composer will automatically create a new project based on Roadiz and download every dependency. 
 
 Composer script will copy a default configuration file and your entry-points in `web/` folder automatically 
-and a sample `Vagrantfile` in your project root.
+and a `.env` file in your project root to setup your *Docker* development environment.
 
 ### Update Roadiz and your own theme assets
 

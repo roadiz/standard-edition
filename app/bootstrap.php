@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 use Symfony\Component\Dotenv\Dotenv;
 
-if (PHP_VERSION_ID < 70200) {
+if (PHP_VERSION_ID < 70400) {
     echo 'Your PHP version is ' . phpversion() . "." . PHP_EOL;
-    echo 'You need a least PHP version 7.2.0';
+    echo 'You need a least PHP version 7.4.0';
     exit(1);
 }
 
