@@ -1,4 +1,4 @@
-image: roadiz/php74-runner
+image: roadiz/php80-runner
 
 stages:
     - test
@@ -12,7 +12,7 @@ variables:
 
 example_test:
     stage: test
-    image: roadiz/php74-runner
+    image: roadiz/php80-runner
     interruptible: true
     only:
         - develop
@@ -30,7 +30,7 @@ example_test:
 
 example_build:
     stage: build
-    image: roadiz/php74-runner
+    image: roadiz/php80-runner
     interruptible: true
     only:
         - develop
@@ -76,12 +76,12 @@ example_build:
 
 example_dev_docker:
     stage: deploy
-    image: docker:19.03-git
+    image: docker:git
     # Create a docker image only when a new tag is pushed
     only:
         - develop
     services:
-        - docker:19.03-dind
+        - docker:dind
     variables:
         DOCKER_DRIVER: overlay2
         DOCKER_TLS_CERTDIR: "/certs"

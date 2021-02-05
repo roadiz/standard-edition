@@ -1,0 +1,11 @@
+# Roadiz maintenance tasks
+
+### Update Solr index
+0 0 * * *    cd /var/www/html && . /var/www/html/project_env.sh; /usr/local/bin/php -d memory_limit=-1 bin/roadiz solr:reindex -n -q
+
+### Maintenance tasks: erase +6 months logs and keeps only 20 node-source versions
+0 1 * * *    cd /var/www/html && . /var/www/html/project_env.sh; /usr/local/bin/php bin/roadiz logs:cleanup --erase -n -q
+0 2 * * *    cd /var/www/html && . /var/www/html/project_env.sh; /usr/local/bin/php bin/roadiz versions:purge -c 20 -n -q
+0 2 * * *    cd /var/www/html && . /var/www/html/project_env.sh; /usr/local/bin/php bin/roadiz login-attempts:clean -n -q
+### Empty node trashcan every month
+0 0 1 * *    cd /var/www/html && . /var/www/html/project_env.sh; /usr/local/bin/php -d memory_limit=-1 bin/roadiz nodes:empty-trash -n -q

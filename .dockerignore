@@ -1,5 +1,20 @@
 # Ignore Roadiz tools and cache for
 # creating a docker image
+.dockerignore
+.DS_Store
+.git
+.github
+.gitignore
+.gitlab-ci.yml
+.gitmodules
+.idea
+.data
+.sass-cache
+tests
+README.md
+Dockerfile
+Dockerfile.archive
+docker-compose.yml
 
 */temp*
 */*/temp*
@@ -36,6 +51,8 @@ pimple.json
 !app/gen-src/Proxies/.gitignore
 !docker/php74-nginx-alpine/crontab.txt
 !docker/php74-nginx-alpine/before_launch.sh
+!docker/php-nginx-alpine/crontab.txt
+!docker/php-nginx-alpine/before_launch.sh
 !themes/BaseTheme/static
 !themes/BaseTheme/Resources/views/partials/*
 !themes/BaseTheme/Resources/views/base.html.twig
