@@ -4,7 +4,7 @@
 
 Roadiz is a modern CMS based on a polymorphic node system which can handle many types of services and contents.
 Its back-office has been developed with a high sense of design and user experience.
-Its theming system is built to live independently of back-office allowing easy switching
+Roadiz theming system is built to live independently of back-office allowing easy switching
 and multiple themes for one content basis. For example, it allows you to create one theme
 for your desktop website and another one for your mobile, using the same node hierarchy.
 Roadiz is released under MIT license, so you can reuse
@@ -55,7 +55,7 @@ yarn build; # or npm run build
 Composer will automatically create a new project based on Roadiz and download every dependency. 
 
 Composer script will copy a default configuration file and your entry-points in `web/` folder automatically 
-and a `.env` file in your project root to setup your *Docker* development environment.
+and a `.env` file in your project root to set up your *Docker* development environment.
 
 ### Update Roadiz and your own theme assets
 

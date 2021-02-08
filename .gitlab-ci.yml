@@ -108,12 +108,12 @@ example_dev_docker:
 #
 example_docker:
     stage: deploy
-    image: docker:19.03-git
+    image: docker:git
     # Create a docker image only when a new tag is pushed
     only:
         - tags
     services:
-        - docker:19.03-dind
+        - docker:dind
     variables:
         DOCKER_DRIVER: overlay2
         DOCKER_TLS_CERTDIR: "/certs"
