@@ -1,4 +1,7 @@
 <?php
+/**
+ * @deprecated Use query string _preview param
+ */
 declare(strict_types=1);
 
 use RZ\Roadiz\Core\HttpFoundation\Request;
