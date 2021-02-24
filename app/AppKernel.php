@@ -31,7 +31,7 @@ class AppKernel extends Kernel
     /**
      * {@inheritdoc}
      */
-    public function getPublicFilesPath()
+    public function getPublicFilesPath(): string
     {
         return $this->getPublicDir() . $this->getPublicFilesBasePath();
     }
@@ -39,7 +39,7 @@ class AppKernel extends Kernel
     /**
      * {@inheritdoc}
      */
-    public function getPrivateFilesPath()
+    public function getPrivateFilesPath(): string
     {
         return $this->getProjectDir() . $this->getPrivateFilesBasePath();
     }
@@ -47,7 +47,7 @@ class AppKernel extends Kernel
     /**
      * {@inheritdoc}
      */
-    public function getFontsFilesPath()
+    public function getFontsFilesPath(): string
     {
         return $this->getProjectDir() . $this->getFontsFilesBasePath();
     }
