@@ -9,6 +9,7 @@
         "roadiz/documents": "~1.6.0 || dev-develop",
         "roadiz/markdown": "~1.6.0 || dev-develop",
         "roadiz/entity-generator": "~1.6.0 || dev-main",
+        "roadiz/random": "~1.6.0 || dev-main",
         "rezozero/tree-walker": "~0.8"
     },
     "require-dev": {
