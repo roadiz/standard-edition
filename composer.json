@@ -4,12 +4,7 @@
     "type": "project",
     "require": {
         "php": ">=7.4",
-        "roadiz/roadiz": "~1.6.0 || dev-develop",
-        "roadiz/models": "~1.6.0 || dev-develop",
-        "roadiz/documents": "~1.6.0 || dev-develop",
-        "roadiz/markdown": "~1.6.0 || dev-develop",
-        "roadiz/entity-generator": "~1.6.0 || dev-main",
-        "roadiz/random": "~1.6.0 || dev-main",
+        "roadiz/roadiz": "~1.6.0",
         "rezozero/tree-walker": "~0.8"
     },
     "require-dev": {
