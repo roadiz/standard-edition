@@ -1,10 +1,11 @@
 {
     "name": "roadiz/standard-edition",
-    "description": "Roadiz standard edition",
+    "description": "Roadiz – Standard edition",
     "type": "project",
     "require": {
-        "php": ">=7.2",
-        "roadiz/roadiz": "~1.5.0"
+        "php": ">=7.4",
+        "roadiz/roadiz": "~1.6.0",
+        "rezozero/tree-walker": "~0.8.4"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.3",
@@ -13,7 +14,7 @@
     },
     "suggest": {
         "sentry/sentry": "Allows monolog to send your log messages to a Sentry instance.",
-        "php-http/guzzle6-adapter": "Required for sentry/sentry",
+        "php-http/guzzle7-adapter": "Required for sentry/sentry",
         "guzzlehttp/psr7": "Required for sentry/sentry",
         "roadiz/abstract-blog-theme": "Enhance your theme with many useful blog features.",
         "roadiz/abstract-pdf-theme": "Enhance your theme with PDF generation features.",
@@ -90,7 +91,6 @@
             "samples/dev.php.sample": "./web/dev.php",
             "samples/index.php.sample": "./web/index.php",
             "samples/preview.php.sample": "./web/preview.php",
-            "samples/Vagrantfile.sample": "./Vagrantfile",
             "./.env.dist": "./.env"
         },
         "config-path": "./app/conf/config.yml"

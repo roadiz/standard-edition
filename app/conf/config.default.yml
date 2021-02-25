@@ -1,12 +1,13 @@
 ---
-appNamespace: "chooseAnUniqueNameForYourApp"
-timezone: "Europe/Paris"
+appNamespace: '%env(string:APP_NAMESPACE)%'
+timezone: '%env(string:APP_TIMEZONE)%'
 doctrine:
     driver: "pdo_mysql"
-    host: "localhost"
-    user: ""
-    password: ""
-    dbname: ""
+    host: '%env(string:MYSQL_HOST)%'
+    user: '%env(string:MYSQL_USER)%'
+    password: '%env(string:MYSQL_PASSWORD)%'
+    dbname: '%env(string:MYSQL_DATABASE)%'
+    server_version: '%env(string:MYSQL_VERSION)%'
     # "utf8mb4" charset requires at least mysql 5.7
     # due to large index requirement.
     # otherwise change it to "utf8"
@@ -19,7 +20,7 @@ doctrine:
 # setting after creating content in your website, all
 # node-sources data will be lost.
 inheritance:
-    type: joined
+    type: single_table
 # Register here your themes…
 themes: []
 # http://symfony.com/doc/current/reference/configuration/doctrine.html#caching-drivers
@@ -29,52 +30,33 @@ cacheDriver:
     host: ~
     port: ~
 security:
-    secret: "change#this#secret#very#important"
-    session_name: roadiz_token
-    session_cookie_secure: false
+    secret: '%env(string:APP_SECURITY_SECRET)%'
+    session_name: '%env(string:APP_SECURITY_SESSION_NAME)%'
+    session_cookie_secure: '%env(bool:APP_SECURITY_COOKIE_SECURE)%'
     session_cookie_httponly: true
-    # Change default password algorithm from sha512 to argon2i
     algorithm: argon2i
-# For Vagrant MailCatcher
-#mailer:
-#    type: smtp
-#    host: "localhost"
-#    port: 1025
-#    encryption: false
-#    username: ""
-#    password: ""
+
 mailer:
-    # Do not use NULL mailer type.
-    type: smtp
-    host: "localhost"
-    port: 25
-    encryption: false
-    username: ""
-    password: ""
-# Doctrine entities search paths
-# Append yours here if you want to create custom
-# entities in your theme. Path must be relative to
-# root dir (app/)
-entities:
-    - "../vendor/roadiz/roadiz/src/Roadiz/Core/Entities"
-    - "../vendor/roadiz/models/src/Roadiz/Core/AbstractEntities"
-    - "gen-src/GeneratedNodeSources"
+    type: '%env(string:MAILER_TYPE)%'
+    host: '%env(string:MAILER_HOST)%'
+    port: '%env(int:MAILER_PORT)%'
+    encryption: '%env(MAILER_ENCRYPTION)%'
+    username: '%env(MAILER_USER)%'
+    password: '%env(MAILER_PASSWORD)%'
+
 # Lifetime of remember-me cookie in seconds (30 days)
 rememberMeLifetime: 2592000
-# Add service providers here OR add them directly in AppKernel::register
-additionalServiceProviders: []
-additionalCommands: []
 # Image intervention and Intervention Request
 # settings for generating image on the fly
 assetsProcessing:
     # gd or imagick (gd does not support TIFF and PSD formats)
-    driver: gd
-    defaultQuality: 95
+    driver: '%env(string:APP_ASSETS_DRIVER)%'
+    defaultQuality: '%env(int:APP_ASSETS_DEFAULT_QUALITY)%'
     # pixel size limit () after roadiz
     # should create a smaller copy.
-    maxPixelSize: 2500
-    jpegoptimPath: ~
-    pngquantPath: ~
+    maxPixelSize: '%env(int:APP_ASSETS_MAX_PIXEL_SIZE)%'
+    jpegoptimPath: /usr/bin/jpegoptim
+    pngquantPath: /usr/bin/pngquant
     subscribers: []
 #
 # Solr endpoint example
@@ -82,10 +64,10 @@ assetsProcessing:
 #solr:
 #    endpoint:
 #        localhost:
-#            host: "localhost"
-#            port: "8983"
+#            host: '%env(string:SOLR_HOST)%'
+#            port: '%env(int:SOLR_PORT)%'
 #            path: "/"
-#            core: "mycore"
+#            core: '%env(string:SOLR_CORE_NAME)%'
 #            timeout: 3
 #            username: ""
 #            password: ""
@@ -95,11 +77,20 @@ assetsProcessing:
 #
 #reverseProxyCache:
 #    frontend:
-#        localhost:
-#            host: localhost
-#            domainName: myapp.test
-#
-#        external:
-#            host: varnish
-#            domainName: myapp.test
+#        varnish:
+#            host: '%env(string:VARNISH_HOST)%'
+#            domainName: '%env(string:VARNISH_DOMAIN)%'
 
+#
+# Monolog non-default configuration
+#
+#monolog:
+#    handlers:
+#        default:
+#            type: rotating_file
+#            path: '%kernel.log_dir%/roadiz.log'
+#            level: DEBUG
+#        sentry:
+#            type: sentry
+#            level: WARNING
+#            url: '%env(string:APP_SENTRY_DSN)%'

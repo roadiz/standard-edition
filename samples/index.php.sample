@@ -3,13 +3,7 @@ declare(strict_types=1);
 
 use RZ\Roadiz\Core\HttpFoundation\Request;
 
-if (PHP_VERSION_ID < 70200) {
-    echo 'Your PHP version is ' . phpversion() . "." . PHP_EOL;
-    echo 'You need a least PHP version 7.2.0';
-    exit(1);
-}
-
-require(dirname(__DIR__) . "/vendor/autoload.php");
+require(dirname(__DIR__) . "/app/bootstrap.php");
 
 if ($trustedProxies = $_SERVER['TRUSTED_PROXIES'] ?? false) {
     Request::setTrustedProxies(
@@ -27,7 +21,7 @@ $kernel = new AppKernel('prod', false);
 /*
  * Use Symfony internal http cache (use Varnish instead if possible)
  */
-if ((bool) $_SERVER['USE_APP_CACHE']) {
+if ((bool) $_SERVER['APP_CACHE']) {
     $kernel = new AppCache($kernel);
     // When using the HttpCache, you need to call the method in your front controller
     // instead of relying on the configuration parameter
