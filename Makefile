@@ -94,7 +94,7 @@ ngrok:
 
 test:
 	php vendor/bin/phpcbf -p
-	php vendor/bin/phpstan analyse -c phpstan.neon -l max themes
+	php vendor/bin/phpstan analyse -c phpstan.neon
 	php bin/roadiz lint:twig themes/${THEME}/Resources/views
 
 blackfire:
