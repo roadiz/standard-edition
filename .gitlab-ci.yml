@@ -12,7 +12,6 @@ variables:
 
 example_test:
     stage: test
-    image: roadiz/php80-runner
     interruptible: true
     only:
         - develop
@@ -30,7 +29,6 @@ example_test:
 
 example_build:
     stage: build
-    image: roadiz/php80-runner
     interruptible: true
     only:
         - develop

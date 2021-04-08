@@ -1,7 +1,6 @@
 <?php
 declare(strict_types=1);
 
-use RZ\Roadiz\Core\Events\Cache\CachePurgeAssetsRequestEvent;
 use RZ\Roadiz\Core\Events\Cache\CachePurgeRequestEvent;
 use RZ\Roadiz\Core\HttpFoundation\Request;
 use Symfony\Component\EventDispatcher\EventDispatcher;
