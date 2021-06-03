@@ -46,7 +46,7 @@ services:
         env_file: "./.env"
         build:
             # Use Nginx
-            context: ./docker/php74-nginx-alpine
+            context: ./docker/php-nginx-alpine
             # Use Apache
             #context: ./docker/php74-apache
             args:

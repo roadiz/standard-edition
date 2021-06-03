@@ -164,7 +164,7 @@ realpath_cache_ttl=600
 
 ## Build a docker image with Gitlab Registry
 
-You can create a standalone *Docker* image with your Roadiz project thanks to our `roadiz/php74-nginx-alpine` base 
+You can create a standalone *Docker* image with your Roadiz project thanks to our `roadiz/php80-nginx-alpine` base 
 image, a continuous integration tool such as *Gitlab CI* and a private *Docker* registry. 
 All your theme assets will be compiled in a controlled environment, and your production website 
 will have a minimal downtime at each update.
