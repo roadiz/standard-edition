@@ -60,6 +60,11 @@ class AppKernel extends Kernel
         parent::register($container);
 
         /*
+         * Enable Rozier backoffice
+         */
+        $container->register(new \Themes\Rozier\Services\RozierServiceProvider());
+
+        /*
          * Add your own service providers.
          */
     }

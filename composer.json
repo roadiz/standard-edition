@@ -4,16 +4,17 @@
     "type": "project",
     "require": {
         "php": ">=7.4",
-        "roadiz/roadiz": "dev-develop",
-        "roadiz/models": "dev-develop",
-        "roadiz/documents": "dev-develop",
-        "roadiz/markdown": "dev-develop",
-        "roadiz/openid": "dev-main",
-        "roadiz/dts-generator": "dev-main",
-        "roadiz/nodetype-contracts": "dev-main",
+        "rezozero/tree-walker": "~0.8.4",
         "roadiz/doc-generator": "dev-main",
+        "roadiz/documents": "dev-develop",
+        "roadiz/dts-generator": "dev-main",
         "roadiz/entity-generator": "dev-main",
-        "rezozero/tree-walker": "~0.8.4"
+        "roadiz/markdown": "dev-develop",
+        "roadiz/models": "dev-develop",
+        "roadiz/nodetype-contracts": "dev-main",
+        "roadiz/openid": "dev-main",
+        "roadiz/roadiz": "dev-develop",
+        "roadiz/rozier": "~1.7.0 || dev-develop"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.3",
