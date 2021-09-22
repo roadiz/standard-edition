@@ -74,23 +74,41 @@ assetsProcessing:
 #            password: ""
 
 #
-# Reverse proxy invalidation
+# Messenger non-default configuration
 #
-#reverseProxyCache:
-#    frontend:
-#        varnish:
-#            host: '%env(string:VARNISH_HOST)%'
-#            domainName: '%env(string:VARNISH_DOMAIN)%'
+messenger:
+    failure_transport: 'failed_default'
+    transports:
+        default:
+            dsn: '%env(string:APP_MESSENGER_DEFAULT_TRANSPORT_DSN)%'
+            options: []
+        async:
+            dsn: 'doctrine://default?queue_name=async'
+            options: []
+        failed_default:
+            dsn: 'doctrine://default?queue_name=failed_default'
+            options: []
+    routing:
+        RZ\Roadiz\Message\AsyncMessage: async
 
 #
-# Monolog non-default configuration
+# Reverse proxy invalidation
 #
-#monolog:
-#    handlers:
-#        default:
-#            type: rotating_file
-#            path: '%kernel.log_dir%/roadiz.log'
-#            level: DEBUG
+reverseProxyCache:
+    frontend:
+        varnish:
+            host: '%env(string:VARNISH_HOST)%'
+            domainName: '%env(string:VARNISH_DOMAIN)%'
+
+#
+# Monolog configuration
+#
+monolog:
+    handlers:
+        default:
+            type: rotating_file
+            path: '%kernel.log_dir%/roadiz.log'
+            level: INFO
 #        sentry:
 #            type: sentry
 #            level: WARNING
