@@ -24,6 +24,7 @@ RUN /usr/bin/crontab -u www-data /crontab.txt \
 
 VOLUME /var/www/html/files \
        /var/www/html/web/files \
+       /var/www/html/web/assets \
        /var/www/html/app/logs  \
        /var/www/html/app/conf \
        /var/www/html/app/gen-src/GeneratedNodeSources \

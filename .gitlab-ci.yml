@@ -12,7 +12,6 @@ variables:
 
 example_test:
     stage: test
-    image: roadiz/php80-runner
     interruptible: true
     only:
         - develop
@@ -25,12 +24,11 @@ example_test:
         - composer install --no-scripts
         - composer run-script post-install-cmd
         - vendor/bin/phpcs
-        - vendor/bin/phpstan analyse -c phpstan.neon -l max themes
+        - vendor/bin/phpstan analyse -c phpstan.neon
         - php bin/roadiz lint:twig themes/BaseTheme/Resources/views
 
 example_build:
     stage: build
-    image: roadiz/php80-runner
     interruptible: true
     only:
         - develop

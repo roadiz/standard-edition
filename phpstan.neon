@@ -1,4 +1,7 @@
 parameters:
+    level: max
+    paths:
+        - themes
     excludes_analyse:
         - */node_modules/*
         - */bower_components/*
